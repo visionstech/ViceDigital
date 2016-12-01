@@ -25,14 +25,14 @@ class DashboardController extends Controller {
       * Shows the publisher dashboard.
       * @param         
       * @return Response
-      * Created on: 28/11/2016
-      * Updated on: 28/11/2016
+      * Created on: 01/12/2016
+      * Updated on: 01/12/2016
     **/
-    public function getDashboard()
+    public function getIndex()
     {
         try {	
             $products = Product::all();
-            return view('publisher/dashboard', compact('products'));
+            return view('dashboard/dashboard', compact('products'));
         }
         catch (\Exception $e) 
         { 	
@@ -47,13 +47,13 @@ class DashboardController extends Controller {
       * Shows the configuration settings.
       * @param      
       * @return Response
-      * Created on: 28/11/2016
-      * Updated on: 28/11/2016
+      * Created on: 01/12/2016
+      * Updated on: 01/12/2016
     **/
     public function getConfiguration()
     {
         try {
-            return view('publisher/configuration');
+            return view('dashboard/configuration');
         }
         catch (\Exception $e) 
         { 	
