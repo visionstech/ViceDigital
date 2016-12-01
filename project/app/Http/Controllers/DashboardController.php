@@ -22,17 +22,17 @@ use App\Repositories\CommonRepository;
 class DashboardController extends Controller {
 
 /**
-      * Shows the Dashboard dashboard.
+      * Shows the publisher dashboard.
       * @param         
       * @return Response
-      * Created on: 01/12/2016
-      * Updated on: 01/12/2016
+      * Created on: 28/11/2016
+      * Updated on: 28/11/2016
     **/
-    public function getIndex()
+    public function getDashboard()
     {
         try {	
             $products = Product::all();
-            return view('dashboard/dashboard', compact('products'));
+            return view('publisher/dashboard', compact('products'));
         }
         catch (\Exception $e) 
         { 	
@@ -47,13 +47,13 @@ class DashboardController extends Controller {
       * Shows the configuration settings.
       * @param      
       * @return Response
-      * Created on: 01/12/2016
-      * Updated on: 01/12/2016
+      * Created on: 28/11/2016
+      * Updated on: 28/11/2016
     **/
     public function getConfiguration()
     {
         try {
-            return view('dashboard/configuration');
+            return view('publisher/configuration');
         }
         catch (\Exception $e) 
         { 	
