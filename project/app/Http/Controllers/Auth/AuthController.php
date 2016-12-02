@@ -167,7 +167,7 @@ class AuthController extends Controller
             {
                 if(Auth::user()->role == 2)
                 {
-                    return redirect('/publisher/dashboard');
+                    return redirect('/dashboard');
                 }
                 else 
                 {
