@@ -216,7 +216,7 @@ class PublisherController extends Controller {
       * @param           
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 30/11/2016
+      * Updated on: 01/12/2016
     **/
     public function getAddPositions($publisherId=null)
     {
@@ -224,11 +224,8 @@ class PublisherController extends Controller {
 
         $products = Product::get()->toArray();
         $positions = Positioning::get()->toArray();
-       /* $publisher = Publisher::where('id', decrypt($publisherId))->get()->toArray();
-        if($publisher[0]['user_id']==Auth::user()->id){*/
           $publisherId=$publisherId;
           return view('publisher/add_positions', compact('products','positions','publisherId'));
-        //}
       }
         catch (\Exception $e) 
         { 	
@@ -245,7 +242,7 @@ class PublisherController extends Controller {
       * @param           
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 30/11/2016
+      * Updated on: 01/12/2016
     **/
     public function postAddPositions(Requests\AddPositionSetting $request)
     {
@@ -283,16 +280,13 @@ class PublisherController extends Controller {
       * @param           
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 30/11/2016
+      * Updated on: 01/12/2016
     **/
     public function getAddCustom($publisherId=null)
     {
       try {
-        /*$publisher = Publisher::where('id', decrypt($publisherId))->get()->toArray();
-        if($publisher[0]['user_id']==Auth::user()->id){*/
           $publisherId=$publisherId;
           return view('publisher/add_custom', compact('publisherId'));
-        //}
       }
       catch (\Exception $e) 
       {   
