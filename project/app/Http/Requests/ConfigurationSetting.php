@@ -22,7 +22,7 @@ class ConfigurationSetting extends Request {
 	public function rules()
 	{	
             return [
-                'name'      => trim('required|alpha|min:3|max:32'),
+                'name'      => trim('required|regex:/^[\pL\s]+$/u|min:3|max:32'),
                 'password'  => 'sometimes|confirmed|min:6|max:30',
                 'products'  => 'sometimes',
             ];

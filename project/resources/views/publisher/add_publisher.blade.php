@@ -2,8 +2,10 @@
 @section('title')
 	Publishers
 @endsection
+<style>
+.error_form{color:red;font-size:15px}    
+</style>
 @section('content')
-    
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
@@ -13,29 +15,34 @@
         </ol>
     </div>
     <!-- /top tiles -->
-
-    
     <div class="row">
         <h3>Add Publisher</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
+        <div class="error_form"></div>
+            <div class="x_panel">            
 				<div class="x_title tab_on">
 					<a class="btn btn-default" href="">Configuration</a>
-					<a  class="btn btn-primary" href="">Ad Positions</a>
-					<a class="btn btn-primary" href="">Custom</a>
+                    <?php if($publisherId !=''){ ?>
+                        <a  class="btn btn-primary" href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
+                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
+                    <?php }else { ?>
+					   <a  class="btn btn-primary invalid_step" href="javascript:void(0);">Ad Positions</a>
+                       <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
+					<?php } ?>
+                    
 				</div>
             <div class="x_content"><br />
                 @include('errors.user_error')
                 <form action="{{ url('/publisher/add-configuration') }}" method="post" class="form-label-left">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="publisherId" value="{{ $publisherId }}" >
                     @include('publisher.configuration_form',['submitButtonText' => 'Submit'])
                 </form>
             </div>
         </div>
       </div>
     </div>
-    
-@endsection  
+@endsection
 
 @section('js')
 <script type="text/javascript">
@@ -62,7 +69,6 @@ $(document).ready(function()
     
     });
 	
-	
 	$("#add_targeting").click(function(){
 	    var sizeTarget=$(".target_sub").size();
         if(sizeTarget<49){
@@ -74,7 +80,6 @@ $(document).ready(function()
 		$('.target_main div.target_sub:last').remove();
 	});
 	
-	
 	$("#add_page_type").click(function(){
 	    var sizePage=$(".pagetype_sub").size();
         if(sizePage<49){
@@ -85,13 +90,10 @@ $(document).ready(function()
 	$("#delete_page_type").click(function(){
 		$('.pagetype_main div.pagetype_sub:last').remove();
 	});
-	
-	
-	
-	
-}); 
-	
-	
-</script>
+    $(".invalid_step").click(function(){
+        $('.error_form').html('Please fill this step first.');
+    });
 
+}); 
+</script>
 @endsection

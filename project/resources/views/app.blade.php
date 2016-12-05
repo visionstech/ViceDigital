@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>VICE Media LLC | @yield('title')</title>
-    
+    <title>VICE Digital | @yield('title')</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/fav_icon.ico') }}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/fav_icon.ico') }}"/>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
@@ -59,8 +60,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation -->
-        
+        <!-- /top navigation -->        
         <!-- page content -->
         <div class="right_col" role="main">
             <?php if (Session::has('message')) { $message = Session::get('message'); ?>
@@ -88,9 +88,6 @@
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>
-
-    
-    @yield('js')
-    
+        @yield('js')
 </body>
 </html>

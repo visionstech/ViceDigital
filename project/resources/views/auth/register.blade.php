@@ -15,6 +15,7 @@
                 <?php Session::pull('message', 'User Registered Successfully!'); 
                 } ?>
                 <section class="login_content">
+                    <img src="{{ asset('/images/VICE_DIGITAL_BLACK-02.png') }}" />
                     <form action="{{ url('/auth/register') }}" method="post" class="form-signup">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <h1>Registeration</h1>

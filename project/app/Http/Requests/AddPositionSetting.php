@@ -22,13 +22,13 @@ class AddPositionSetting extends Request {
 	public function rules()
 	{	
             return [
-                'slotname'      => trim('required|alpha|min:3|max:32'),
-                'container'     => trim('required'),
+                'slotname'      => trim('required|alpha|min:5|max:50'),
+                'container'     => trim('required|min:5|max:50'),
                 'positioning'   => trim('required'),
                 'mobile'        => trim('required'),
                 'tablet'        => trim('required'),
                 'desktop'       => trim('required'),
-                'page_type'     => trim('required')
+                //'page_type'     => trim('required')
             ];
 	}
 	

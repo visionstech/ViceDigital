@@ -165,7 +165,7 @@ class AuthController extends Controller
 
             if($this->auth->attempt($credentials))
             {
-                if(Auth::user()->role == 2)
+                if((Auth::user()->role == 2) || (Auth::user()->role == 1))
                 {
                     return redirect('/dashboard');
                 }

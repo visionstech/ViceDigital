@@ -32,13 +32,15 @@ class DashboardController extends Controller {
     {
         try {	
             $products = Product::all();
-            return view('dashboard/dashboard', compact('products'));
+            if(Auth::user()->role==1){
+              return view('dashboard/admin/dashboard', compact('products'));
+            }else{
+              return view('dashboard/dashboard', compact('products'));
+            }
         }
         catch (\Exception $e) 
         { 	
-            $result = [
-                    'exception_message' => $e->getMessage()
-             ];
+            $result = ['exception_message' => $e->getMessage()];
             return view('errors.error', $result);
         }
     }
@@ -52,15 +54,17 @@ class DashboardController extends Controller {
     **/
     public function getConfiguration()
     {
-        try {
-            return view('dashboard/configuration');
+        try{
+            if(Auth::user()->role==1){
+              return view('dashboard/admin/configuration');
+            }else{
+              return view('dashboard/configuration');
+            }
         }
         catch (\Exception $e) 
         { 	
-            $result = [
-                    'exception_message' => $e->getMessage()
-             ];
+            $result = ['exception_message' => $e->getMessage()];
             return view('errors.error', $result);
         }
     }
-  }
+}

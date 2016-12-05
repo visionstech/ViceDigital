@@ -23,8 +23,9 @@
                                 <th>Domain</th>
                                 <th>Impressions</th>
                                 <th>Notices</th>
+                                <th>Created by</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,7 @@
                                     <td>{{ $publisher->website }}</td>
                                     <td>10.000.000</td>
                                     <td>6</td>
+                                    <td>{{ ($publisher->role==1)?'Admin':'User' }}</td>
                                     <td>{{ $publisher->status }}</td>
                                     <td><a class="btn btn-primary" href="{{ url('/publisher/add-configuration/'.encrypt($publisher->id)) }}">Edit</a></td>
                                 </tr>
@@ -51,7 +53,6 @@
 <script>
    $(document).ready(function(){
         $("#example").dataTable();
-
     });
 </script>
 @endsection

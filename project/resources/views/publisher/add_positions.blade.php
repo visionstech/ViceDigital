@@ -2,8 +2,10 @@
 @section('title')
 	Publishers
 @endsection
+<style>
+.error_form{color:red;font-size:15px;}    
+</style>
 @section('content')
-    
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
@@ -13,22 +15,27 @@
         </ol>
     </div>
     <!-- /top tiles -->
-
-    
     <div class="row">
         <h3>Add Publisher</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="error_form"></div>
             <div class="x_panel">
 				<div class="x_title tab_on">
-					<a class="btn btn-primary" href="">Configuration</a>
-					<a class="btn btn-default"  href="">Ad Positions</a>
-					<a class="btn btn-primary" href="">Custom</a>
+                    <a class="btn btn-primary" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
+                    <a class="btn btn-default"  href="javascript:void(0);">Ad Positions</a>
+                    <?php if($adId !=''){ ?>
+                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
+                    <?php }else { ?>
+                      <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
+                    <?php } ?>
+
 				</div>
             <div class="x_content"><br />
                 @include('errors.user_error')
                 <form action="{{ url('/publisher/add-positions') }}" method="post" class="form-label-left">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                     <input type="hidden" name="publisherId" value="{{ $publisherId }}">
+                    <input type="hidden" name="publisherId" value="{{ $publisherId }}">
+                    <input type="hidden" name="adId" value="{{ ($adId)?$adId:'' }}">
                     @include('publisher.add_form',['submitButtonText' => 'Submit'])
                 </form>
             </div>
@@ -78,6 +85,9 @@ $(document).ready(function()
 	$("#delete_targeting").click(function(){
 		$('.target_main div.target_sub:last').remove();
 	});
+    $(".invalid_step").click(function(){
+        $('.error_form').html('Please fill this step first.');
+    });
 }); 
 </script>
 

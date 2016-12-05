@@ -2,7 +2,10 @@
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ url('/dashboard') }}" class="site_title"></i> <span>VICE Media LLC</span></a>
+              <a href="{{ url('/dashboard/dashboard') }}" class="site_title"></i> 
+              <!--<span>VICE Digital LLC</span>-->
+                  <img src="{{ asset('/images/VICE_DIGITAL_WHITE-02-(1).png') }}" />
+              </a>
             </div>
             <div class="clearfix"></div> <br />
             <!-- sidebar menu -->
