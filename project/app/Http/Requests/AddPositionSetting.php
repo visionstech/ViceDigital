@@ -22,7 +22,7 @@ class AddPositionSetting extends Request {
 	public function rules()
 	{	
             return [
-                'slotname'      => trim('required|alpha|min:5|max:50'),
+                'slotname'      => trim('required|regex:/^[\pL\s]+$/u|min:5|max:50'),
                 'container'     => trim('required|min:5|max:50'),
                 'positioning'   => trim('required'),
                 'mobile'        => trim('required'),

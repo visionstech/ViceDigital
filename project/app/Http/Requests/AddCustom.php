@@ -21,15 +21,11 @@ class AddCustom extends Request {
 	 */
 	public function rules()
 	{	
-            return [
-                'custom_scripting'      => trim('required')
-            ];
+            return ['custom_scripting' => trim('required')];
 	}
 	
 	public function messages()
 	{	
             return [];
-		
 	}
-	
 }

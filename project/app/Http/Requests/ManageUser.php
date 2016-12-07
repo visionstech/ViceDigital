@@ -30,7 +30,7 @@ class ManageUser extends Request {
 				$rules['email']=trim('required|email|unique:users');
 				$rules['website']=trim('required|min:5|max:50|unique:publishers');
 			}
-			$rules['name']=trim('required|alpha|min:5|max:50');
+			$rules['name']=trim('required|regex:/^[\pL\s]+$/u|min:5|max:50');
 			$rules['role']=trim('required');
 			$rules['products']=trim('required');
             return $rules;
