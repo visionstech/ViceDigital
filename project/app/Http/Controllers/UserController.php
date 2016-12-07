@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Events\UserManageAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -106,6 +107,17 @@ class UserController extends Controller {
                     'password' => bcrypt($randomPassword),
                     'role' => $data['role']
                 ]);
+                //Email Event will be fire to user with new password?
+                
+                $emailData=array();
+                $emailData['email'] = $data['email'];
+                $emailData['name'] = $data['name'];
+                $emailData['userId'] = $create_user->id;
+                $emailData['password'] = $randomPassword; 
+
+                event(new UserManageAction($emailData));
+
+                //End Email Event
 
                 // Save the domain for publisher
 
