@@ -20,13 +20,21 @@ use App\Repositories\CommonRepository;
 
 
 class DashboardController extends Controller {
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller manages user's profile.
+    |
+    */    
 
-/**
-      * Shows the publisher dashboard.
+    /**
+      * Shows the User dashboard.
       * @param         
       * @return Response
       * Created on: 01/12/2016
-      * Updated on: 01/12/2016
+      * Updated on: 05/12/2016
     **/
     public function getIndex()
     {
@@ -50,7 +58,7 @@ class DashboardController extends Controller {
       * @param      
       * @return Response
       * Created on: 01/12/2016
-      * Updated on: 01/12/2016
+      * Updated on: 05/12/2016
     **/
     public function getConfiguration()
     {

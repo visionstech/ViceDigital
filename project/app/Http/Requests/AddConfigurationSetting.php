@@ -21,17 +21,16 @@ class AddConfigurationSetting extends Request {
 	 */
 	public function rules()
 	{	
-
-			if($this->request->get('method')=="Update"){
-				$rules= array('email'  => trim('required|email|unique:publishers'));
-			}else{
+		if($this->request->get('method')=="Update"){
 				$rules= array('email'  => trim('required|email|unique:publishers,'.Auth::user()->id));
-			}
-          	$rules= array(
+		}else{
+				$rules= array('email'  => trim('required|email|unique:publishers'));
+		}
+        $rules= array(
             	'website'=> trim('required|min:5|max:50'),
                 'name'   => trim('required|regex:/^[\pL\s]+$/u|min:5|max:50')
             );
-			return $rules;
+		return $rules;
 	}
 	
 	public function messages()

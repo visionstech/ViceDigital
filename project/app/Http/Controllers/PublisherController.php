@@ -99,7 +99,7 @@ class PublisherController extends Controller {
     
     /**
       * Return form for new publisher.
-      * @param           
+      * @param  Publisher Id      
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -140,7 +140,7 @@ class PublisherController extends Controller {
           $data = $request->all();
           $publisherData=array(
                   'user_id'=>Auth::user()->id,
-                  'status'=>1,
+                  'status'=>$data['status'],
                   'overlays'=>(in_array(1,$data['products'])) ? 1 : 0,
                   'infusion'=>(in_array(2,$data['products'])) ? 1 : 0,
                   'dynamic_ads'=>(in_array(3,$data['products'])) ? 1 : 0,
@@ -251,7 +251,7 @@ class PublisherController extends Controller {
     
     /**
       * List all the publishers.
-      * @param           
+      * @param  Publisher id      
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -275,7 +275,7 @@ class PublisherController extends Controller {
 	
 	  /**
       * Return get Ad Positions settings.
-      * @param           
+      * @param  Publisher id and Ad position id         
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -301,7 +301,7 @@ class PublisherController extends Controller {
 
     /**
       * Return Delete Ad Positions settings.
-      * @param           
+      * @param  Publisher id, Ad position id and Delete Status(Suspended or Deleted)         
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -334,7 +334,7 @@ class PublisherController extends Controller {
 
     /**
       * Return Post Ad Positions settings.
-      * @param           
+      * @param  Request $request      
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -374,7 +374,7 @@ class PublisherController extends Controller {
 
     /**
       * Return get Custom settings.
-      * @param           
+      * @param  Publisher id         
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016
@@ -394,7 +394,7 @@ class PublisherController extends Controller {
 
     /**
       * Save the Add Custom Scripting.
-      * @param Request $request           
+      * @param  Request $request           
       * @return Response
       * Created on: 30/11/2016
       * Updated on: 02/12/2016

@@ -23,10 +23,10 @@ class NewUser extends Request {
 	public function rules()
 	{	
             return [
-                'website'    => trim('required|min:3|max:32|unique:publishers'),
-                'name'      => trim('required|alpha|min:3|max:32'),
+                'website'    => trim('required|min:5|max:50|unique:publishers'),
+                'name'      => trim('required|alpha|min:5|max:50'),
                 'email'     => trim('required|email|max:100|unique:users'),
-                'password'  => 'required|confirmed|min:6|max:30',
+                'password'  => 'required|confirmed|min:5|max:50',
                 'products'  => 'required',
             ];
 	}
@@ -36,8 +36,8 @@ class NewUser extends Request {
             return [
                 'email.email'   => 'The must be a valid email address.',
                 'website.required' => 'The domain is required.',
-                'website.min' => 'The domain must be at least 3 characters.',
-                'website.max' => 'The domain may not be greater than 32 characters.',
+                'website.min' => 'The domain must be at least 5 characters.',
+                'website.max' => 'The domain may not be greater than 50 characters.',
                 'website.unique' => 'The domain is already taken.',
             ];
 		

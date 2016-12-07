@@ -27,7 +27,7 @@ class AuthenticateUser extends Request {
         
 		return [
 			'email'     => 'required|email|max:255',
-			'password'  => 'required|min:6|max:30'
+			'password'  => 'required|min:5|max:50'
 		];
 	}
 	

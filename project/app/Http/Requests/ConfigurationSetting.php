@@ -23,7 +23,7 @@ class ConfigurationSetting extends Request {
 	{	
             return [
                 'name'      => trim('required|regex:/^[\pL\s]+$/u|min:3|max:32'),
-                'password'  => 'sometimes|confirmed|min:6|max:30',
+                'password'  => 'sometimes|confirmed|min:5|max:50',
                 'products'  => 'sometimes',
             ];
 	}

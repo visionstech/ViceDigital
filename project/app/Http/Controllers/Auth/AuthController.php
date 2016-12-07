@@ -83,8 +83,7 @@ class AuthController extends Controller
     }
     
     /**
-      * Return registration form.
-      * @param Request $request         
+      * Return registration form.    
       * @return Response
       * Created on: 27/11/2016
       * Updated on: 27/11/2016
@@ -127,15 +126,13 @@ class AuthController extends Controller
             $create_publisher = Publisher::create([
                 'user_id' => $create_user->id,
                 'website' => $request->website,
-                'status' => 1,
                 'email' => $create_user->email,
                 'name' => $request->name,
                 'overlays' => (in_array(1,$request->products)) ? 1 : 0,
                 'infusion' => (in_array(2,$request->products)) ? 1 : 0,
                 'dynamic_ads' => (in_array(3,$request->products)) ? 1 : 0,
-                'programmatic' => (in_array(4,$request->products)) ? 1 : 0,
+                'programmatic' => (in_array(4,$request->products)) ? 1 : 0
             ]);
-
             Session::put('message', 'User Registered Successfully!');
             return redirect()->back();
         }

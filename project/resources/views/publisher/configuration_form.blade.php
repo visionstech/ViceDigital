@@ -41,8 +41,12 @@
     <h2>Standard Products</h2>
     <div class="form-group">
         <div class="col-md-6 col-sm-6 col-xs-12">
-            @foreach($products as $product)
-                <?php $check_product = (((!empty($PublisherData))&& $PublisherData[0][$product['name']] == 1) ? 'checked="checked"' : ''); 
+
+            @foreach($products as $key=>$product)
+                <?php 
+                $productOld=array(old('products.0'),old('products.1'),old('products.2'),old('products.3'));
+                $check_product = (((!empty($PublisherData))&& $PublisherData[0][$product['name']] == 1) ? 'checked="checked"' : ((in_array(($key+1), $productOld))? 'checked="checked"':'')); 
+                
                 ?>
                 <input type="checkbox" {{ $check_product }} name="products[]" value="{{ $product['id'] }}">
                 <?php 
