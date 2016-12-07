@@ -337,7 +337,7 @@ class PublisherController extends Controller {
       * @param  Request $request      
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 02/12/2016
+      * Updated on: 07/12/2016
     **/
     public function postAddPositions(Requests\AddPositionSetting $request)
     {
@@ -353,7 +353,7 @@ class PublisherController extends Controller {
                         'tablet_sizes'=>($data['tablet'] =='default' ? $data['tablet'] : $data['tablet_sizes']),
                         'desktop_sizes'=>($data['desktop'] =='default' ? $data['desktop'] : $data['desktop_sizes']),
                         'lazyload'=>(isset($data['lazyload'])) ? $data['lazyload'] : 0,
-                        'page_type'=>serialize($data['page_type']),
+                        'page_type'=>((isset($data['page_type']))?(serialize($data['page_type'])):''),
                   );
         if($data['adId']){
           //Update Ads Data
