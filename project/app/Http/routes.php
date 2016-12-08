@@ -13,9 +13,7 @@
 
 Route::group(['middleware' => 'web'], function () {
 	Route::get('/', 'HomeController@index');
-        
-   
-	Route::controller('publisher', 'PublisherController');
+    Route::controller('publisher', 'PublisherController');
 	Route::controller('dashboard', 'DashboardController');
 	Route::controller('user', 'UserController');
 	Route::controllers([

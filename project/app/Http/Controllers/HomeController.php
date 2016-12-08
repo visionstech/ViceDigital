@@ -35,7 +35,7 @@ class HomeController extends Controller {
         try {
             if(Auth::user())
             {   
-                return redirect('/publisher/dashboard');
+                return redirect('/dashboard');
             }
             else 
             {   

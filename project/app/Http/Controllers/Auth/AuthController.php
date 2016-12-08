@@ -128,11 +128,28 @@ class AuthController extends Controller
                 'website' => $request->website,
                 'email' => $create_user->email,
                 'name' => $request->name,
-                'overlays' => (in_array(1,$request->products)) ? 1 : 0,
-                'infusion' => (in_array(2,$request->products)) ? 1 : 0,
-                'dynamic_ads' => (in_array(3,$request->products)) ? 1 : 0,
-                'programmatic' => (in_array(4,$request->products)) ? 1 : 0
+                'overlays' => ((isset($data['products']))?((in_array(1,$data['products'])) ? 1 : 0):0),
+                'infusion' => ((isset($data['products']))?((in_array(2,$data['products'])) ? 1 : 0):0),
+                'dynamic_ads' => ((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0),
+                'programmatic' => ((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0)
             ]);
+            //Login Automatically User Functionality
+            $credentials = array(
+                'email' => $request->email,
+                'password' => $request->password
+            );
+
+            if($this->auth->attempt($credentials))
+            {
+                if((Auth::user()->role == 2) || (Auth::user()->role == 1))
+                {
+                    return redirect('/dashboard');
+                }
+                else 
+                {
+                    return redirect('/');
+                }
+            }
             Session::put('message', 'User Registered Successfully!');
             return redirect()->back();
         }

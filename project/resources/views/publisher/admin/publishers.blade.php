@@ -6,7 +6,7 @@
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="{{ url('/publisher/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li class="active">Publisher Overview</li>
         </ol>
     </div>
@@ -30,11 +30,18 @@
                         </thead>
                         <tbody>
                             @foreach($publishers as $publisher)
+                                <?php if($publisher->role==1){
+                                        $created_by='Admin';
+                                    }else if($publisher->role==2){
+                                        $created_by='User';
+                                    }else{
+                                         $created_by='Partnership Manager';
+                                    } ?>
                                 <tr>
                                     <td>{{ $publisher->website }}</td>
                                     <td>10.000.000</td>
                                     <td>6</td>
-                                    <td>{{ ($publisher->role==1)?'Admin':'User' }}</td>
+                                    <td>{{ $created_by }}</td>
                                     <td>{{ $publisher->status }}</td>
                                     <td><a class="btn btn-primary" href="{{ url('/publisher/add-configuration/'.encrypt($publisher->id)) }}">Edit</a></td>
                                 </tr>

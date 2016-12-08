@@ -41,19 +41,25 @@
                         <div>
                             <label class="register_label text-left col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <input type="password" placeholder="Password" class="form-control" name="password" maxlength="30">
+                                <input type="password" placeholder="Password" class="form-control" name="password" maxlength="30" value="{{ old('password') }}">
                             </div>
                         </div>
                         <div>
                             <label class="register_label text-left col-md-3 col-sm-3 col-xs-12" for="password_confirmation">Repeat Password <span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <input type="password" placeholder="Repeat Password" class="form-control" name="password_confirmation" maxlength="30">
+                                <input type="password" placeholder="Repeat Password" class="form-control" value="{{ old('password_confirmation') }}" name="password_confirmation" maxlength="30">
                             </div>
                         </div>
                         <div class="text-left col-md-12 col-sm-12 col-xs-12">
                             <label>Which products would you like to subscribe to? <span class="required">*</span></label><br>
-                            @foreach($products as $product)
-                                <input type="checkbox" name="products[]" value="{{ $product->id }}">
+                            @foreach($products as $key=>$product)
+
+                             <?php 
+                                $productOld=array(old('products.0'),old('products.1'),old('products.2'),old('products.3'));
+                                $check_product = ((old('products')) ? ((in_array(($key+1), $productOld))? 'checked="checked"':''):''); 
+                                
+                                ?>
+                                <input type="checkbox" {{ $check_product }} name="products[]" value="{{ $product->id }}">
                                 <?php 
                                     $product_name_array = explode('_', $product->name);
                                     $product_name_array = array_map(function($word) { return ucfirst($word); }, $product_name_array);

@@ -8,7 +8,7 @@
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="{{ url('/publisher/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
         </ol>
     </div>
     <!-- /top tiles -->

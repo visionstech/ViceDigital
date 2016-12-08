@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
+
 
 use App\Events\UserManageAction;
 use App\Http\Controllers\Controller;
@@ -13,6 +15,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Auth;
 use Session;
 use DB;
+//use Illuminate\Encryption\BaseEncrypter;
 
 class UserController extends Controller {
 	
@@ -24,8 +27,6 @@ class UserController extends Controller {
     | This controller manages user's profile.
     |
     */
-
-
     /**
      * Create a new authentication controller instance.
      *
@@ -33,10 +34,8 @@ class UserController extends Controller {
      */
     public function __construct(Guard $auth)
     {
-
-        $this->middleware(['auth','admin'] );
-        
-        $this->auth = $auth;
+      $this->middleware(['auth','admin'] );
+      $this->auth = $auth;
     }
 
     /**
@@ -48,15 +47,14 @@ class UserController extends Controller {
 
     public function getIndex()
     {
-        try {
-            $users=User::where('role','!=',1)->get();
-            return view('user.users', compact('users'));
-        }catch (\Exception $e){   
-          $result = ['exception_message' => $e->getMessage()];
-          return view('errors.error', $result);
-        }
+      try {
+        $users=User::where('role','!=',1)->get();
+        return view('user.users', compact('users'));
+      }catch (\Exception $e){   
+        $result = ['exception_message' => $e->getMessage()];
+        return view('errors.error', $result);
+      }
     }
-
 
     /**
       * Return get Add User Form.
@@ -84,22 +82,20 @@ class UserController extends Controller {
       }
     }
 
-
     /**
       * Add user of any type of role.
       * @param Request $request            
       * @return Response
       * Created on: 06/12/2016
-      * Updated on: 06/12/2016
+      * Updated on: 07/12/2016
     **/
     public function postAddUser(Requests\ManageUser $request)
     {
-        try {
+      try {
             $data = $request->all();
+            $user_products = ((isset($data['products']))?(implode(',',$data['products'])):'');
             if($data['userId']==''){
                 $randomPassword=$this->getRandomString(10);
-
-                $user_products = implode(',',$data['products']);
                 // Create new user
                 $create_user = User::create([
                     'name' => $data['name'],
@@ -107,18 +103,15 @@ class UserController extends Controller {
                     'password' => bcrypt($randomPassword),
                     'role' => $data['role']
                 ]);
-                //Email Event will be fire to user with new password?
-                
+                //Email Event will be fire to user with new password
                 $emailData=array();
                 $emailData['email'] = $data['email'];
                 $emailData['name'] = $data['name'];
                 $emailData['userId'] = $create_user->id;
-                $emailData['password'] = $randomPassword; 
+                $emailData['password'] = $randomPassword;
 
                 event(new UserManageAction($emailData));
-
-                //End Email Event
-
+                
                 // Save the domain for publisher
 
                 $create_publisher = Publisher::create([
@@ -126,15 +119,14 @@ class UserController extends Controller {
                     'website' => $data['website'],
                     'email' => $create_user->email,
                     'name' => $data['name'],
-                    'overlays' => (in_array(1,$data['products'])) ? 1 : 0,
-                    'infusion' => (in_array(2,$data['products'])) ? 1 : 0,
-                    'dynamic_ads' => (in_array(3,$data['products'])) ? 1 : 0,
-                    'programmatic' => (in_array(4,$data['products'])) ? 1 : 0,
+                    'overlays' =>((isset($data['products']))?((in_array(1,$data['products'])) ? 1 : 0):0),
+                    'infusion' => ((isset($data['products']))?((in_array(2,$data['products'])) ? 1 : 0):0),
+                    'dynamic_ads' => ((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0),
+                    'programmatic' => ((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0),
                 ]);
                 $action='Added';
             }else{
                 $GetData = User::where('id',decrypt($data['userId']))->get();
-                $user_products = implode(',',$data['products']);
                 $user = User::find(decrypt($data['userId']));
                 $user->name = $data['name'];
                 $user->email = $data['email'];
@@ -152,10 +144,10 @@ class UserController extends Controller {
                     'status' => $data['status'],
                     'email' => $data['email'],
                     'name' => $data['name'],
-                    'overlays' => (in_array(1,$data['products'])) ? 1 : 0,
-                    'infusion' => (in_array(2,$data['products'])) ? 1 : 0,
-                    'dynamic_ads' => (in_array(3,$data['products'])) ? 1 : 0,
-                    'programmatic' => (in_array(4,$data['products'])) ? 1 : 0,
+                    'overlays' => ((isset($data['products']))?((in_array(1,$data['products'])) ? 1 : 0):0),
+                    'infusion' => ((isset($data['products']))?((in_array(2,$data['products'])) ? 1 : 0):0),
+                    'dynamic_ads' => ((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0),
+                    'programmatic' => ((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0),
                     'updated_by'=>Auth::user()->id,
                     'updated_ip'=>(array_key_exists('HTTP_CLIENT_IP', $_SERVER)) ? $_SERVER['HTTP_CLIENT_IP'] : $_SERVER['REMOTE_ADDR']
                 ]);
@@ -179,7 +171,7 @@ class UserController extends Controller {
       * @param  User id and Delete Status(Suspended or Deleted)         
       * @return Response
       * Created on: 06/12/2016
-      * Updated on: 06/12/2016
+      * Updated on: 07/12/2016
     **/
     public function getDeleteUser($userId=null,$status=null)
     {
@@ -215,7 +207,4 @@ class UserController extends Controller {
         }
         return $randomString;
     }
-
-
-
 }

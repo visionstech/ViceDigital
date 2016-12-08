@@ -3,17 +3,16 @@
 	Dashboard
 @endsection
 @section('content')
-
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><i class="fa fa-home"></i> Dashboard</li>
+           <li><i class="fa fa-home"></i>Dashboard</li>
         </ol>
     </div>
     <!-- /top tiles -->
 
     <div class="row">
-        <h3>Admin Dashboard</h3>
+        <h3>User Dashboard</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content">

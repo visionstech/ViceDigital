@@ -41,10 +41,13 @@ class DashboardController extends Controller {
         try {	
             $products = Product::all();
             if(Auth::user()->role==1){
-              return view('dashboard/admin/dashboard', compact('products'));
+                $viewFolder='admin';
+            }elseif(Auth::user()->role==2){
+                $viewFolder='user';
             }else{
-              return view('dashboard/dashboard', compact('products'));
+              $viewFolder='partnershipManager';
             }
+            return view('dashboard/'.$viewFolder.'/dashboard', compact('products'));
         }
         catch (\Exception $e) 
         { 	
@@ -64,10 +67,13 @@ class DashboardController extends Controller {
     {
         try{
             if(Auth::user()->role==1){
-              return view('dashboard/admin/configuration');
+                $viewFolder='admin';
+            }elseif(Auth::user()->role==2){
+                $viewFolder='user';
             }else{
-              return view('dashboard/configuration');
+              $viewFolder='partnershipManager';
             }
+            return view('dashboard/'.$viewFolder.'/configuration');
         }
         catch (\Exception $e) 
         { 	

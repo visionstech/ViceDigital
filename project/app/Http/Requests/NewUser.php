@@ -27,7 +27,6 @@ class NewUser extends Request {
                 'name'      => trim('required|regex:/^[\pL\s]+$/u|min:5|max:50'),
                 'email'     => trim('required|email|max:100|unique:users'),
                 'password'  => 'required|confirmed|min:5|max:50',
-                'products'  => 'required',
             ];
 	}
 	

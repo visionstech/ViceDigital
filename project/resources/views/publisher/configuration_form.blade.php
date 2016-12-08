@@ -46,7 +46,6 @@
                 <?php 
                 $productOld=array(old('products.0'),old('products.1'),old('products.2'),old('products.3'));
                 $check_product = (((!empty($PublisherData))&& $PublisherData[0][$product['name']] == 1) ? 'checked="checked"' : ((in_array(($key+1), $productOld))? 'checked="checked"':'')); 
-                
                 ?>
                 <input type="checkbox" {{ $check_product }} name="products[]" value="{{ $product['id'] }}">
                 <?php 
@@ -72,7 +71,7 @@
         <label class="control-label text-left col-md-2 col-sm-2 col-xs-12" for="krux_id">Krux ID</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
             <?php $krux_id = (old('krux_id')) ? old('krux_id') : ((!empty($PublisherData)) ? $PublisherData[0]['krux_id'] : '');  ?>
-            <input type="text" placeholder="Krux ID" class="form-control col-md-7 col-xs-12" name="krux_id" value="{{ $krux_id }}">
+            <input type="text" placeholder="Krux ID" class="form-control col-md-7 col-xs-12" name="krux_id" value="{{ $krux_id }}" />
         </div>
         <div class="clearfix"></div>
     </div>
@@ -131,7 +130,6 @@
             <span class="btn btn-primary" id="add_page_type"><i class="fa fa-plus"></i></span>
             <span class="btn btn-primary" id="delete_page_type"><i class="fa fa-minus"></i></span>
         </div>
-        
         <div class="clearfix"></div>
     </div>
     <div class="pagetype_main one">
@@ -142,7 +140,7 @@
                         $pageTitle = (old('page_type_title')) ? old('page_type_title'.$Page) : ((!empty($PageTypeData)) ? $PageType['title'] : '');
                         $pageSelector = (old('page_type_selector')) ? old('page_type_selector'.$Page) : ((!empty($PageTypeData)) ? $PageType['selector'] : '');
         ?>
-                    <div class="pagetype_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="Page Title" class="form-control col-md-7 col-xs-12" name="page_type_title[]" value="{{ $pageTitle }}"></div><div class="col-md-6 col-sm-6 col-xs-6">            <input type="text" placeholder="Selector" class="form-control col-md-7 col-xs-12" name="page_type_selector[]" value="{{ $pageSelector }}"></div></div></div>
+                    <div class="pagetype_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="Page Title" class="form-control col-md-7 col-xs-12" name="page_type_title[]" value="{{ $pageTitle }}"></div><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="Selector" class="form-control col-md-7 col-xs-12" name="page_type_selector[]" value="{{ $pageSelector }}"></div></div></div>
         
         <?php   } $Page++;} } ?>    
 
@@ -163,9 +161,8 @@
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12 col-sm-12 col-xs-12">
-        <?php if($publisherId !='') { echo '<input type="hidden" name="method" value="Update">'; }else{  echo '<input type="hidden" name="method" value="Insert">'; }?>
+        <?php if($publisherId !='') { echo '<input type="hidden" name="method" value="Update">'; }else{  echo '<input type="hidden" name="method" value="Insert">'; } ?>
             <button type="submit" class="btn btn-success">{{ $submitButtonText }}</button>
         </div>
         <div class="clearfix"></div>
-    </div>
- 
+    </div> 

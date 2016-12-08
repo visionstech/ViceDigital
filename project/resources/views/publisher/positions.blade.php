@@ -6,7 +6,7 @@
 <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="{{ url('/publisher/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li><a href="{{ url('/publisher/publishers') }}">Publisher Overview</a></li>
            <li class="active">Edit Publisher</li>
         </ol>
@@ -16,7 +16,18 @@
         <h3>Ad Positions</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-            <a class="btn btn-primary" style="float:right;" href="{{ url('/publisher/add-positions/'.$publisherId) }}">NEW ADSLOT</a>
+                <div class="x_title tab_on">
+                    <a class="btn btn-default" href="">Configuration</a>
+                    <?php if($publisherId !=''){ ?>
+                        <a  class="btn btn-primary" href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
+                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
+                    <?php }else { ?>
+                       <a  class="btn btn-primary invalid_step" href="javascript:void(0);">Ad Positions</a>
+                       <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
+                    <?php } ?>
+                    
+                </div>
+            
                 <div class="x_content">
                     @if(Session::has('success')) 
                         <div class="alert alert-success"> 
@@ -45,15 +56,20 @@
                                     <td>6</td>
                                     <td>{{ $position->status }}</td>
                                     <td>
+                                    <?php if($position->status != 'Suspended'){ ?>
                                     <a class="btn btn-primary actionAnchor" data-target=".bs-example-modal-sm" data-toggle="modal" href="javascript:void(0);" data-adId="{{ $adsId }}" data-status="Suspended" >Suspend</a>
+                                    <?php } 
+                                         if($position->status != 'Deleted'){ 
+                                    ?>
                                     <a class="btn btn-primary actionAnchor" data-target=".bs-example-modal-dm" data-toggle="modal" href="javascript:void(0);" data-adId="{{ $adsId }}" data-status="Deleted" >Delete</a>
+                                    <?php }  ?>
                                     <a class="btn btn-primary" href="{{ url('/publisher/add-positions/'.$publisherId.'/'.encrypt($position->id))  }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                
+                <a class="btn btn-primary" style="float:left;" href="{{ url('/publisher/add-positions/'.$publisherId) }}">NEW ADSLOT</a>
             </div>
         </div>
     </div>

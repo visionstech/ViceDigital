@@ -77,12 +77,12 @@ class PublisherController extends Controller {
       * @param           
       * @return Response
       * Created on: 28/11/2016
-      * Updated on: 02/12/2016
+      * Updated on: 07/12/2016
     **/
     public function getPublishers()
     {
       try { 
-          if(Auth::user()->role == 1){
+          if((Auth::user()->role == 1) || (Auth::user()->role == 3)){
             $publishers = Publisher::join('users', 'users.id', '=', 'publishers.user_id')->select('users.role','publishers.*')->get();
             return view('publisher/admin/publishers', compact('publishers'));
           }else{
@@ -141,10 +141,10 @@ class PublisherController extends Controller {
           $publisherData=array(
                   'user_id'=>Auth::user()->id,
                   'status'=>$data['status'],
-                  'overlays'=>(in_array(1,$data['products'])) ? 1 : 0,
-                  'infusion'=>(in_array(2,$data['products'])) ? 1 : 0,
-                  'dynamic_ads'=>(in_array(3,$data['products'])) ? 1 : 0,
-                  'programmatic'=>(in_array(4,$data['products'])) ? 1 : 0,
+                  'overlays'=>((isset($data['products']))?((in_array(1,$data['products'])) ? 1 : 0):0),
+                  'infusion'=>((isset($data['products']))?((in_array(2,$data['products'])) ? 1 : 0):0),
+                  'dynamic_ads'=>((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0),
+                  'programmatic'=>((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0),
                   'name'=>$data['name'],
                   'website'=>$data['website'],
                   'email'=>$data['email'],
@@ -254,7 +254,7 @@ class PublisherController extends Controller {
       * @param  Publisher id      
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 02/12/2016
+      * Updated on: 07/12/2016
     **/
     public function getPositions($publisherId=null)
     {
@@ -262,7 +262,12 @@ class PublisherController extends Controller {
             if($publisherId == ''){
               return redirect('/publisher/publishers');
             }
-            $positions = Ads::where('publisher_id',decrypt($publisherId))->where('status','!=','Deleted')->get();
+            if((Auth::user()->role == 1) || (Auth::user()->role == 3)){
+              //For Admin And Partnership Manager Roles
+              $positions = Ads::where('publisher_id',decrypt($publisherId))->get();
+            }else{
+              $positions = Ads::where('publisher_id',decrypt($publisherId))->where('status','!=','Deleted')->get();
+            }
             $publisherId=$publisherId;
             return view('publisher/positions', compact('positions','publisherId'));
         }
@@ -278,7 +283,7 @@ class PublisherController extends Controller {
       * @param  Publisher id and Ad position id         
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 02/12/2016
+      * Updated on: 07/12/2016
     **/
     public function getAddPositions($publisherId=null,$adId=null)
     {
@@ -289,7 +294,7 @@ class PublisherController extends Controller {
         $adId=$adId;
         $AdsData=array();
         if($adId!=''){
-          $AdsData=Ads::where('id',decrypt($adId))->where('status','!=','Deleted')->get()->toArray();
+          $AdsData=Ads::where('id',decrypt($adId))->get()->toArray();
         }
         return view('publisher/add_positions', compact('products','positions','publisherId','adId','AdsData'));
       }catch (\Exception $e) 
@@ -304,7 +309,7 @@ class PublisherController extends Controller {
       * @param  Publisher id, Ad position id and Delete Status(Suspended or Deleted)         
       * @return Response
       * Created on: 30/11/2016
-      * Updated on: 02/12/2016
+      * Updated on: 07/12/2016
     **/
     public function getDeletePositions($publisherId=null,$adId=null,$status=null)
     {
@@ -313,8 +318,8 @@ class PublisherController extends Controller {
             return redirect('publisher/positions/'.$publisherId)->with('error', 'You are not autorize to delete Ad Positions.');
         }
         //Soft Delete Ads Positions
-        if(Auth::user()->role==1){
-          //Admin
+        if((Auth::user()->role==1) || (Auth::user()->role==3)){
+          //Admin and Patnership Manager
           $UpdateStatus=Ads::where('id',decrypt($adId))->update(array('status'=>$status));
             return redirect('publisher/positions/'.$publisherId)->with('success', 'Ad Positions '.$status.' Successfully.');
         }else{
@@ -345,15 +350,15 @@ class PublisherController extends Controller {
         $data = $request->all();
         $publisherId=decrypt($data['publisherId']);
         $Adsdata=array('status'=>(isset($data['status'])) ? $data['status'] : 'Inactive',
-                        'publisher_id'=>$publisherId,
-                        'slotname'=>$data['slotname'],
-                        'container'=>$data['container'],
-                        'positioning'=>$data['positioning'],
-                        'mobile_sizes'=>($data['mobile'] =='default' ? $data['mobile'] : $data['mobile_sizes']),
-                        'tablet_sizes'=>($data['tablet'] =='default' ? $data['tablet'] : $data['tablet_sizes']),
-                        'desktop_sizes'=>($data['desktop'] =='default' ? $data['desktop'] : $data['desktop_sizes']),
-                        'lazyload'=>(isset($data['lazyload'])) ? $data['lazyload'] : 0,
-                        'page_type'=>((isset($data['page_type']))?(serialize($data['page_type'])):''),
+                      'publisher_id'=>$publisherId,
+                      'slotname'=>$data['slotname'],
+                      'container'=>$data['container'],
+                      'positioning'=>$data['positioning'],
+                      'mobile_sizes'=>($data['mobile'] =='default' ? $data['mobile'] : $data['mobile_sizes']),
+                      'tablet_sizes'=>($data['tablet'] =='default' ? $data['tablet'] : $data['tablet_sizes']),
+                      'desktop_sizes'=>($data['desktop'] =='default' ? $data['desktop'] : $data['desktop_sizes']),
+                      'lazyload'=>(isset($data['lazyload'])) ? $data['lazyload'] : 0,
+                      'page_type'=>((isset($data['page_type']))?(serialize($data['page_type'])):''),
                   );
         if($data['adId']){
           //Update Ads Data
@@ -364,7 +369,7 @@ class PublisherController extends Controller {
           //Insert Ads Data
           $insertAds=Ads::insert($Adsdata);
         }
-        return redirect('/publisher/add-custom/'.$data['publisherId']);
+        return redirect('/publisher/positions/'.$data['publisherId']);
       }catch (\Exception $e) 
       {   
         $result = ['exception_message' => $e->getMessage()];
