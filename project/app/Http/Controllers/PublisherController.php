@@ -218,7 +218,7 @@ class PublisherController extends Controller {
                 }
             }
             $Publisher_Id=encrypt($Publisher_Id);
-            return redirect('publisher/positions/'.$data['publisherId']);
+            return redirect('publisher/add-configuration/'.$data['publisherId'])->with('success','Configuration Updated Successfully.');
           }else{
             //Insert Publisher Data
               $Publisher_Id=Publisher::insertGetId($publisherData);
@@ -239,7 +239,7 @@ class PublisherController extends Controller {
                 $val++;
               }
               $Publisher_Id=encrypt($Publisher_Id);
-              return redirect('publisher/add-positions/'.$Publisher_Id);
+              return redirect('publisher/add-configuration/'.$Publisher_Id)->with('success','Configuration Added Successfully.');
           }
 			 
   		}catch (\Exception $e) 
