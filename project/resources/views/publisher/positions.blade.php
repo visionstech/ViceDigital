@@ -17,14 +17,14 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title tab_on">
-                    <a class="btn btn-default" href="">Configuration</a>
+                   
                     <?php if($publisherId !=''){ ?>
-                        <a  class="btn btn-primary" href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
-                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
-                    <?php }else { ?>
-                       <a  class="btn btn-primary invalid_step" href="javascript:void(0);">Ad Positions</a>
-                       <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
-                    <?php } ?>
+                        <a class="btn btn-default btn-ctrl" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
+                        <a  class="btn btn-default btn-ctrl btn-active" href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
+                    <?php if(Auth::user()->role !=2 ){ ?>
+                        <a class="btn btn-default btn-ctrl" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
+                    <?php } 
+                    } ?>
                     
                 </div>
             
@@ -45,7 +45,9 @@
                                 <th>Slotname</th>
                                 <th>Notices</th>
                                 <th>Status</th>
+                                <?php if(Auth::user()->role !=2 ){ ?>
                                 <th>Action</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +57,7 @@
                                     <td>{{ $position->slotname }}</td>
                                     <td>6</td>
                                     <td>{{ $position->status }}</td>
+                                    <?php if(Auth::user()->role !=2 ){ ?>
                                     <td>
                                     <?php if($position->status != 'Suspended'){ ?>
                                     <a class="btn btn-primary actionAnchor" data-target=".bs-example-modal-sm" data-toggle="modal" href="javascript:void(0);" data-adId="{{ $adsId }}" data-status="Suspended" >Suspend</a>
@@ -64,12 +67,15 @@
                                     <a class="btn btn-primary actionAnchor" data-target=".bs-example-modal-dm" data-toggle="modal" href="javascript:void(0);" data-adId="{{ $adsId }}" data-status="Deleted" >Delete</a>
                                     <?php }  ?>
                                     <a class="btn btn-primary" href="{{ url('/publisher/add-positions/'.$publisherId.'/'.encrypt($position->id))  }}">Edit</a></td>
+                                    <?php } ?>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <a class="btn btn-primary" style="float:left;" href="{{ url('/publisher/add-positions/'.$publisherId) }}">NEW ADSLOT</a>
+                <?php if(Auth::user()->role !=2 ){ ?>
+                        <a class="btn btn-primary" style="float:left;" href="{{ url('/publisher/add-positions/'.$publisherId) }}">NEW ADSLOT</a>
+                <?php }?>
             </div>
         </div>
     </div>

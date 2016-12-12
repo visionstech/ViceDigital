@@ -1,35 +1,34 @@
-@extends('app')
-@section('title')
-    {{ ($userId)?'Edit':'Add'}} User
-@endsection
-@section('content')    
+<?php $__env->startSection('title'); ?>
+    <?php echo e(($userId)?'Edit':'Add'); ?> User
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>    
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-           <li><a href="{{ url('/user') }}">User Overview</a></li>
-           <li class="active">{{ ($userId)?'Edit':'Add'}} User</li>
+           <li><a href="<?php echo e(url('/dashboard')); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="<?php echo e(url('/user')); ?>">User Overview</a></li>
+           <li class="active"><?php echo e(($userId)?'Edit':'Add'); ?> User</li>
         </ol>
     </div>
     <!-- /top tiles -->
 
     <div class="row">
-        <h3>{{ ($userId)?'Edit':'Add'}} User</h3>
+        <h3><?php echo e(($userId)?'Edit':'Add'); ?> User</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
             <div class="x_content"><br />
 
-            <form action="{{ url('/user/add-user') }}" method="post" class="form-horizontal form-label-left">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="userId" value="{{ $userId }}">
-                <input type="hidden" name="method" value="{{ ($userId)?'update':'create'}}">
-                @include('errors.user_error')
+            <form action="<?php echo e(url('/user/add-user')); ?>" method="post" class="form-horizontal form-label-left">
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                <input type="hidden" name="userId" value="<?php echo e($userId); ?>">
+                <input type="hidden" name="method" value="<?php echo e(($userId)?'update':'create'); ?>">
+                <?php echo $__env->make('errors.user_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Domain<span class="required">*</span></label>
 
                     <?php $website = (old('website')) ? old('website') : ((!empty($publisherDetail)) ? $publisherDetail[0]['website'] : '');  ?>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" placeholder="Domain" class="form-control col-md-7 col-xs-12" name="website" value="{{ $website }}">
+                        <input type="text" placeholder="Domain" class="form-control col-md-7 col-xs-12" name="website" value="<?php echo e($website); ?>">
                     </div>
                 </div>
 
@@ -38,7 +37,7 @@
                     <?php $name = (old('name')) ? old('name') : ((!empty($userDetail)) ? $userDetail[0]['name'] : '');  
                     ?>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" placeholder="Name" class="form-control col-md-7 col-xs-12" name="name" value="{{ $name }}">
+                        <input type="text" placeholder="Name" class="form-control col-md-7 col-xs-12" name="name" value="<?php echo e($name); ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,7 +45,7 @@
                     <?php $email = (old('email')) ? old('email') : ((!empty($userDetail)) ? $userDetail[0]['email'] : '');  
                     ?>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" placeholder="Email" class="form-control col-md-7 col-xs-12" name="email" value="{{ $email }}">
+                        <input type="text" placeholder="Email" class="form-control col-md-7 col-xs-12" name="email" value="<?php echo e($email); ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -58,9 +57,9 @@
                         <div class="select-wrap">
                             <select name="role" class="form-control">
                                 <option value="">Select role</option>
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" <?php echo ($Role == ($role->id))? "selected":''; ?> > {{ $role->role }} </option>
-                                @endforeach
+                                <?php foreach($roles as $role): ?>
+                                    <option value="<?php echo e($role->id); ?>" <?php echo ($Role == ($role->id))? "selected":''; ?> > <?php echo e($role->role); ?> </option>
+                                <?php endforeach; ?>
                                 
                             </select>
                         <span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
@@ -71,18 +70,18 @@
                     <label for="role" class="control-label col-md-3 col-sm-3 col-xs-12">Which products would you like to subscribe to? <span class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12 custom-check">
             
-                        @foreach($products as $key=>$product)
+                        <?php foreach($products as $key=>$product): ?>
                         <?php
                             $productOld=array(old('products.0'),old('products.1'),old('products.2'),old('products.3'));
                             $check_product = (((!empty($publisherDetail))&& $publisherDetail[0][$product['name']] == 1) ? 'checked="checked"' : ((in_array(($key+1), $productOld))? 'checked="checked"':'')); 
                         ?>
-                            <input type="checkbox" id="{{ $key }}" {{ $check_product }} name="products[]"  value="{{ $product->id }}">
+                            <input type="checkbox" id="<?php echo e($key); ?>" <?php echo e($check_product); ?> name="products[]"  value="<?php echo e($product->id); ?>">
                             <?php 
                                 $product_name_array = explode('_', $product->name);
                                 $product_name_array = array_map(function($word) { return ucfirst($word); }, $product_name_array);
                                 $product_name = implode(' ', $product_name_array); ?>
-                            <label for="{{ $key }}">{{ $product_name }}</label><br>
-                        @endforeach
+                            <label for="<?php echo e($key); ?>"><?php echo e($product_name); ?></label><br>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -113,4 +112,5 @@
         </div>
       </div>
     </div>    
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

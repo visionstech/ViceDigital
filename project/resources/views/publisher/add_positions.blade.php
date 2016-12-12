@@ -21,14 +21,9 @@
         <div class="error_form"></div>
             <div class="x_panel">
 				<div class="x_title tab_on">
-                    <a class="btn btn-primary" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
-                    <a class="btn btn-default"  href="javascript:void(0);">Ad Positions</a>
-                    <?php if($adId !=''){ ?>
-                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
-                    <?php }else { ?>
-                      <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
-                    <?php } ?>
-
+                    <a class="btn btn-default btn-ctrl" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
+                    <a class="btn btn-default btn-ctrl btn-active" href="javascript:void(0);">Ad Positions</a>
+                    <a class="btn btn-default btn-ctrl" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
 				</div>
                 <div class="x_content"><br />
                     @include('errors.user_error')
@@ -36,8 +31,10 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="publisherId" value="{{ $publisherId }}">
                         <input type="hidden" name="adId" value="{{ ($adId)?$adId:'' }}">
+                        <input type="hidden" name="targeting_type" value="position" />
                         @include('publisher.add_form',['submitButtonText' => 'Submit'])
                     </form>
+                    
                 </div>
             </div>
       </div>
@@ -51,7 +48,7 @@ $(document).ready(function()
 {
   $("#add_targeting").click(function(){
 	
-	$(".target_main").append('<div class="target_sub"><div class="form-group"><div class="col-md-3 col-sm-3 col-xs-6"><input type="text" placeholder="key" class="form-control col-md-7 col-xs-12" name="targeting_key[]" value=""></div><div class="col-md-3 col-sm-3 col-xs-6"><input type="text" placeholder="value" class="form-control col-md-7 col-xs-12" name="targeting_value[]" value=""></div></div></div>');
+	$(".target_main").append('<div class="target_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="key" class="form-control col-md-7 col-xs-12" name="targeting_key[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="value" class="form-control col-md-7 col-xs-12" name="targeting_value[]" value=""></div></div></div>');
 	});
 	
 	$(".mobile").click(function(){

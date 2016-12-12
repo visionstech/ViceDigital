@@ -14,6 +14,7 @@
                     <?php Session::pull('message', 'User Registered Successfully!'); 
                     } ?>
                     <section class="login_content">
+                        <img src="<?php echo e(asset('/images/VICE_DIGITAL_BLACK-02.png')); ?>" />
                         <form action="<?php echo e(url('/auth/login')); ?>" method="post" class="form-signup">
                             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                             <h1>Login Form</h1>

@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+
     <title>VICE Digital | @yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/fav_icon.ico') }}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/fav_icon.ico') }}"/>
@@ -23,6 +28,8 @@
     <link rel="stylesheet" href="{{ asset('/css/custom.min.css') }}">
     <!-- Developer Style -->
     <link rel="stylesheet" href="{{ asset('/css/developer.css') }}">
+    <!-- Custom Responsive Css Style 9 Dec 2016-->
+    <link rel="stylesheet" href="{{ asset('/css/custom_responsive.css') }}">
     
     @yield('css')
 </head>

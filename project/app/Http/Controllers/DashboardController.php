@@ -15,8 +15,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Session;
 use Auth;
 use DB;
-use App\Repositories\CommonRepositoryInterface;
-use App\Repositories\CommonRepository;
 
 
 class DashboardController extends Controller {
@@ -27,7 +25,17 @@ class DashboardController extends Controller {
     |
     | This controller manages user's profile.
     |
-    */    
+    */
+    /**
+     * Create a new dashboard controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Guard $auth)
+    {
+        $this->middleware('auth', ['except' => 'getRegister, postRegister']);
+        $this->auth = $auth;
+    } 
 
     /**
       * Shows the User dashboard.

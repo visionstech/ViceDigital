@@ -27,9 +27,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
 				<div class="x_title tab_on">
-					 <a class="btn btn-default" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
-                    <a class="btn btn-default"  href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
-					<a class="btn btn-primary" href="javascript:void(0);">Custom</a>
+					 <a class="btn btn-default btn-ctrl" href="{{ url('/publisher/add-configuration/'.$publisherId) }}">Configuration</a>
+                    <a class="btn btn-default btn-ctrl"  href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
+					<a class="btn btn-default btn-ctrl btn-active" href="javascript:void(0);">Custom</a>
 				</div>
             <div class="x_content"><br />
                 @include('errors.user_error')

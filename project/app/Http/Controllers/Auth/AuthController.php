@@ -108,7 +108,7 @@ class AuthController extends Controller
       * @param Request $request            
       * @return Response
       * Created on: 27/11/2016
-      * Updated on: 27/11/2016
+      * Updated on: 08/12/2016
     **/
     public function postRegister(Requests\NewUser $request)
     {
@@ -176,21 +176,27 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
             );
+            $checkStatus=User::where('email',$request->email)->get();
+            if($checkStatus[0]->status=='Live'){
+                if($this->auth->attempt($credentials))
+                {
+                    if((Auth::user()->role == 2) || (Auth::user()->role == 1))
+                    {
+                        return redirect('/dashboard');
+                    }
+                    else 
+                    {
+                        return redirect('/');
+                    }
+                }
+                else
+                {
+                    return redirect()->back()->withErrors('These credentials do not match our records.');
+                }
+            
+            }else{
 
-            if($this->auth->attempt($credentials))
-            {
-                if((Auth::user()->role == 2) || (Auth::user()->role == 1))
-                {
-                    return redirect('/dashboard');
-                }
-                else 
-                {
-                    return redirect('/');
-                }
-            }
-            else
-            {
-                return redirect()->back()->withErrors('These credentials do not match our records.');
+                return redirect()->back()->withErrors('Sorry Your status is not Live or Active.');
             }
         }
         catch (\Exception $e) 
@@ -227,5 +233,4 @@ class AuthController extends Controller
         }
 
     }
-    
 }

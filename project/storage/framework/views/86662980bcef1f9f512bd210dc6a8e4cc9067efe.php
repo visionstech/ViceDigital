@@ -7,8 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>VICE Media LLC | <?php echo $__env->yieldContent('title'); ?></title>
-    
+    <meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+
+    <title>VICE Digital | <?php echo $__env->yieldContent('title'); ?></title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('/images/fav_icon.ico')); ?>"/>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('/images/fav_icon.ico')); ?>"/>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo e(asset('/css/bootstrap.min.css')); ?>">
     <!-- Font Awesome -->
@@ -22,6 +28,8 @@
     <link rel="stylesheet" href="<?php echo e(asset('/css/custom.min.css')); ?>">
     <!-- Developer Style -->
     <link rel="stylesheet" href="<?php echo e(asset('/css/developer.css')); ?>">
+    <!-- Custom Responsive Css Style 9 Dec 2016-->
+    <link rel="stylesheet" href="<?php echo e(asset('/css/custom_responsive.css')); ?>">
     
     <?php echo $__env->yieldContent('css'); ?>
 </head>
@@ -60,8 +68,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation -->
-        
+        <!-- /top navigation -->        
         <!-- page content -->
         <div class="right_col" role="main">
             <?php if (Session::has('message')) { $message = Session::get('message'); ?>
@@ -89,9 +96,6 @@
     
     <!-- Custom Theme Scripts -->
     <script src="<?php echo e(asset('/js/custom.min.js')); ?>"></script>
-
-    
-    <?php echo $__env->yieldContent('js'); ?>
-    
+        <?php echo $__env->yieldContent('js'); ?>
 </body>
 </html>

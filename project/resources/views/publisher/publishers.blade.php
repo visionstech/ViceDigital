@@ -17,6 +17,7 @@
             <div class="x_panel">
                 <a class="btn btn-primary" style="float:right;" href="{{ url('/publisher/add-configuration') }}">NEW PUBLISHER</a>
                 <div class="x_content">
+                @include('errors.user_error')
                     <table class="table display nowrap dataTable dtr-inline" id="example">
                         <thead>
                             <tr>

@@ -8,7 +8,7 @@
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="<?php echo e(url('/publisher/dashboard')); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="<?php echo e(url('/dashboard')); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
         </ol>
     </div>
     <!-- /top tiles -->

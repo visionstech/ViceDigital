@@ -18,7 +18,7 @@ use DB;
 //use Illuminate\Encryption\BaseEncrypter;
 
 class UserController extends Controller {
-	
+  
     /*
     |--------------------------------------------------------------------------
     | User Controller
@@ -103,16 +103,7 @@ class UserController extends Controller {
                     'password' => bcrypt($randomPassword),
                     'role' => $data['role']
                 ]);
-                //Email Event will be fire to user with new password
-                $emailData=array();
-                $emailData['email'] = $data['email'];
-                $emailData['name'] = $data['name'];
-                $emailData['userId'] = $create_user->id;
-                $emailData['password'] = $randomPassword;
-
-                event(new UserManageAction($emailData));
                 
-                // Save the domain for publisher
 
                 $create_publisher = Publisher::create([
                     'user_id' => Auth::user()->id,
@@ -124,6 +115,21 @@ class UserController extends Controller {
                     'dynamic_ads' => ((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0),
                     'programmatic' => ((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0),
                 ]);
+                //Email Event will be fire to user with new password
+                $emailData=array();
+                $emailData['email'] = $data['email'];
+                $emailData['name'] = $data['name'];
+                $emailData['userId'] = $create_user->id;
+                $emailData['password'] = $randomPassword;
+                $emailData['website'] = $data['website'];
+                $emailData['overlays'] = ((isset($data['products']))?((in_array(1,$data['products'])) ? 1 : 0):0);
+                $emailData['infusion'] = ((isset($data['products']))?((in_array(2,$data['products'])) ? 1 : 0):0);
+                $emailData['dynamic_ads'] = ((isset($data['products']))?((in_array(3,$data['products'])) ? 1 : 0):0);
+                $emailData['programmatic'] = ((isset($data['products']))?((in_array(4,$data['products'])) ? 1 : 0):0);
+
+                event(new UserManageAction($emailData));
+                
+                // Save the domain for publisher
                 $action='Added';
             }else{
                 $GetData = User::where('id',decrypt($data['userId']))->get();

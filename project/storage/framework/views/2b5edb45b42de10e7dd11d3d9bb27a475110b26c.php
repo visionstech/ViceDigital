@@ -2,7 +2,7 @@
 	Publishers
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <style type="text/css" media="screen">
+<style type="text/css" media="screen">
     #editor { 
         position: absolute;
         top: 0;
@@ -14,23 +14,21 @@
     <!-- top tiles -->
     <div class="content-header">
         <ol class="breadcrumb">
-           <li><a href="<?php echo e(url('/publisher/dashboard')); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+           <li><a href="<?php echo e(url('/dashboard')); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
            <li><a href="<?php echo e(url('/publisher/publishers')); ?>">Publisher Overview</a></li>
            <li class="active">Edit Publisher</li>
         </ol>
     </div>
     <!-- /top tiles -->
-
-    
     <div class="row">
         <h3>Add Publisher</h3>
 
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
 				<div class="x_title tab_on">
-					<a class="btn btn-primary" href="<?php echo e(url('/publisher/add-configuration')); ?>">Configuration</a>
-					<a class="btn btn-primary" href="<?php echo e(url('/publisher/positions')); ?>">Ad Positions</a>
-					<a class="btn btn-default" href="<?php echo e(url('/publisher/add-configuration')); ?>">Custom</a>
+					 <a class="btn btn-default btn-ctrl" href="<?php echo e(url('/publisher/add-configuration/'.$publisherId)); ?>">Configuration</a>
+                    <a class="btn btn-default btn-ctrl"  href="<?php echo e(url('/publisher/positions/'.$publisherId)); ?>">Ad Positions</a>
+					<a class="btn btn-default btn-ctrl btn-active" href="javascript:void(0);">Custom</a>
 				</div>
             <div class="x_content"><br />
                 <?php echo $__env->make('errors.user_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
@@ -54,6 +52,18 @@
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/javascript");
     
+    function getCustomScript(){
+
+        var Str='';
+        $.each($('.ace_line'), function(index, value) {
+                Str += $(this).html();
+                Str += '\n';
+        });
+        $("#custom_scripting").val(Str);
+    }
+
+    setTimeout(getCustomScript, 1000);
+
     $("#editor").on('keyup',function(){        
         var Str='';
         $.each($('.ace_line'), function(index, value) {

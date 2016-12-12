@@ -19,5 +19,11 @@ class UserManageAction extends Event
         $this->email = $emailData['email'];
         $this->name = $emailData['name'];
         $this->password = $emailData['password'];
+        $this->website = $emailData['website'];
+        $this->overlays = $emailData['overlays'];
+        $this->infusion = $emailData['infusion'];
+        $this->dynamic_ads = $emailData['dynamic_ads'];
+        $this->programmatic = $emailData['programmatic'];
+    
     }
 }

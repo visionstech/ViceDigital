@@ -1,6 +1,6 @@
 @extends('app')
 @section('title')
-	Publishers
+	{{ ($publisherId)?'Edit':'Add'}} Publishers
 @endsection
 <style>
 .error_form{color:red;font-size:15px}    
@@ -11,24 +11,30 @@
         <ol class="breadcrumb">
            <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li><a href="{{ url('/publisher/publishers') }}">Publisher Overview</a></li>
-           <li class="active">Add Publisher</li>
+           <li class="active">{{ ($publisherId)?'Edit':'Add'}} Publisher</li>
         </ol>
     </div>
     <!-- /top tiles -->
     <div class="row">
-        <h3>Add Publisher</h3>
+        <h3 class="add-header">{{ ($publisherId)?'Edit':'Add'}} Publisher</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="error_form"></div>
             <div class="x_panel">            
 				<div class="x_title tab_on">
-					<a class="btn btn-default" href="">Configuration</a>
-                    <?php if($publisherId !=''){ ?>
-                        <a  class="btn btn-primary" href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
-                        <a class="btn btn-primary" href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
-                    <?php }else { ?>
-					   <a  class="btn btn-primary invalid_step" href="javascript:void(0);">Ad Positions</a>
-                       <a class="btn btn-primary invalid_step" href="javascript:void(0);">Custom</a>
-					<?php } ?>
+					<a class="btn btn-default btn-ctrl btn-active" href="">Configuration</a>
+                    <?php
+                    if($publisherId !=''){ ?>
+                            <a  class="btn btn-default btn-ctrl " href="{{ url('/publisher/positions/'.$publisherId) }}">Ad Positions</a>
+                    <?php if(Auth::user()->role !=2 ){ ?>
+                            <a class="btn btn-default btn-ctrl " href="{{ url('/publisher/add-custom/'.$publisherId) }}">Custom</a>
+                        <?php }
+                    }else{ ?>
+                        <a  class="btn btn-default btn-ctrl invalid_step" href="javascript:void(0);">Ad Positions</a>   
+                     <?php if(Auth::user()->role !=2 ){ ?>
+                                <a class="btn btn-default btn-ctrl invalid_step" href="javascript:void(0);">Custom</a>
+                    <?php }
+                    }
+                    ?>
                     
 				</div>
             <div class="x_content"><br />
@@ -72,7 +78,7 @@ $(document).ready(function()
 	$("#add_targeting").click(function(){
 	    var sizeTarget=$(".target_sub").size();
         if(sizeTarget<49){
-    	   $(".target_main").append('<div class="target_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="key" class="form-control col-md-7 col-xs-12" name="targeting_key[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="value" class="form-control col-md-7 col-xs-12" name="targeting_value[]" value=""></div></div></div>');
+    	   $(".target_main").append('<div class="target_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="key" class="form-control col-md-7 col-xs-12" name="targeting_key[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="value" class="form-control col-md-7 col-xs-12" name="targeting_value[]" value=""></div></div></div>');
     	}
     });
 	
@@ -83,7 +89,7 @@ $(document).ready(function()
 	$("#add_page_type").click(function(){
 	    var sizePage=$(".pagetype_sub").size();
         if(sizePage<49){
-		  $(".pagetype_main").append('<div class="pagetype_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-6"><input type="text" placeholder="Page Title" class="form-control col-md-7 col-xs-12" name="page_type_title[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-6">            <input type="text" placeholder="Selector" class="form-control col-md-7 col-xs-12" name="page_type_selector[]" value=""></div></div></div>');
+		  $(".pagetype_main").append('<div class="pagetype_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="Page Title" class="form-control col-md-7 col-xs-12" name="page_type_title[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="Selector" class="form-control col-md-7 col-xs-12" name="page_type_selector[]" value=""></div></div></div>');
         }
 	});
 	

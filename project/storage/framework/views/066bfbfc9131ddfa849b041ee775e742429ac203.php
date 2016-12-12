@@ -16,23 +16,31 @@
             <div class="x_panel">
                 <a class="btn btn-primary" style="float:right;" href="<?php echo e(url('/publisher/add-configuration')); ?>">NEW PUBLISHER</a>
                 <div class="x_content">
-                <?php echo $__env->make('errors.user_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     <table class="table display nowrap dataTable dtr-inline" id="example">
                         <thead>
                             <tr>
                                 <th>Domain</th>
                                 <th>Impressions</th>
                                 <th>Notices</th>
+                                <th>Created by</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($publishers as $publisher): ?>
+                                <?php if($publisher->role==1){
+                                        $created_by='Admin';
+                                    }else if($publisher->role==2){
+                                        $created_by='User';
+                                    }else{
+                                         $created_by='Partnership Manager';
+                                    } ?>
                                 <tr>
                                     <td><?php echo e($publisher->website); ?></td>
                                     <td>10.000.000</td>
                                     <td>6</td>
+                                    <td><?php echo e($created_by); ?></td>
                                     <td><?php echo e($publisher->status); ?></td>
                                     <td><a class="btn btn-primary" href="<?php echo e(url('/publisher/add-configuration/'.encrypt($publisher->id))); ?>">Edit</a></td>
                                 </tr>
@@ -51,7 +59,6 @@
 <script>
    $(document).ready(function(){
         $("#example").dataTable();
-
     });
 </script>
 <?php $__env->stopSection(); ?>

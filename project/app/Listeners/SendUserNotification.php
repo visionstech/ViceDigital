@@ -25,9 +25,16 @@ class SendUserNotification
      */
     public function handle(UserManageAction $event)
     {
-        // Access the order using $event->order...
-        $user = User::find($event->userId)->toArray();
-      /*  Mail::send('emails.user_created', $user, function($message) use ($user) {
+        $data=array('name'=>$event->name,
+                    'email'=>$event->email,
+                    'password'=>$event->password,
+                    'domain'=>$event->website,
+                    'overlays'=>$event->overlays,
+                    'infusion'=>$event->infusion,
+                    'dynamic_ads'=>$event->dynamic_ads,
+                    'programmatic'=>$event->programmatic,
+                );
+       /* Mail::send('emails.user_created', $data, function($message) use ($data) {
             $message->to('qachd15@gmail.com');
             $message->subject('User Created');
         });*/
