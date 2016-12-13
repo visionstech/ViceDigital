@@ -6,7 +6,7 @@
 
     
     <!-- top tiles -->
-    <div class="content-header">
+    <div class="content-header configuration-bread">
         <ol class="breadcrumb">
            <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li class="active">Configuration</li>
@@ -14,7 +14,7 @@
     </div>
     <!-- /top tiles -->
 
-    <div class="row">
+    <div class="row configuration-data">
         <h3>Configuration</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="ln_solid"></div>
                 <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 submit_button">
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </div>

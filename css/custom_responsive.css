@@ -1,24 +1,52 @@
+@media only screen and (min-width: 1024px) {
+      .nav-sm .nav_title img { width: 100%;}
+}
 @media only screen and (max-width: 1023px) {
     .tab_on a {  min-width: 200px;  padding: 15px;}
+    .admin-dashboard h3,.configuration-data h3,.publisher h3{ padding-left: 10px; }
+        .configuration-bread .breadcrumb {top: 77px;}
+        .submit_button{text-align:center;}
+        .publisher{margin-bottom:20px;}
+        .nav-sm .nav_title img { width: 100%;}
+        .paginate_button.next a{margin-left:6px;}
 }
 @media only screen and (max-width: 767px) {
-    .tab_on a {  min-width: 190px;  padding: 15px;}
+    .tab_on a {  min-width: 185px;  padding: 15px;}
     .btn.btn-primary.btn-ctrl {  margin: 5px 0;}
+    .publisher .col-sm-6{width:50%;}
+    .publisher .col-sm-12{width:100%;}
+    div#example_wrapper > .row {overflow-x:scroll;}
+    
+    .publisher .col-sm-12 table{width:700px;}
 }
 @media only screen and (max-width: 640px) {
     .tab_on a {  min-width: 160px;  padding: 15px;}
+     .admin-dashboard .btn{ padding: 4px 12px;}
+     .dataTables_filter{width:100%;}
 }
 @media only screen and (max-width: 570px) {
-    .tab_on a {  min-width: 130px;  padding: 15px;}
+    .tab_on a {  min-width: 120px;  padding: 10px;}    
     .breadcrumb {  padding: 8px 10px;}
     h3.add-header {  margin: 0 0 40px;}
-    .content-header > .breadcrumb { left: 0; right: 0; margin: 0 auto;  top: 94px;font-size: 11px;}
+    /*.content-header > .breadcrumb { left: 0; right: 0; margin: 0 auto;  top: 94px;font-size: 11px;}*/
     .target_main.one .target_sub, .pagetype_main.one .pagetype_sub {margin-left: 0;}
     .btn.btn-primary.btn-ctrl {min-width: 50px;}
+    .dataTables_length{ width:100%; }
+    .dataTables_filter {width:100%;}
+    div#example_wrapper > .row {-webkit-overflow-scrolling: touch; }
+    .data-pub >.breadcrumb{  top: 91px;}
+    .publisher-padding{padding-top:30px;}
+    .all-form .col-sm-6 { width: 100%;}
 }
 @media only screen and (max-width: 480px) {
     .tab_on a, .tab_on a.btn-active {  margin: 0 5px 5px 0;  width: 100%;}
     button, .buttons, .btn, .modal-footer .btn + .btn {  margin-right: 2px; padding: 9px 7px;}
+    .admin-dashboard .btn { margin-top: 8px;}
+    .configuration-data h3{ font-size: 20px;}
+    .configuration-bread .breadcrumb {top: 72px;  right: 2px;}
+    .configuration-bread .breadcrumb>li+li:before{ padding: 0 0px; }    
+    .admin-dashboard h3, .configuration-data h3, .publisher h3{ font-size: 16px;margin-top: 4px;    }
+    .nav_title img{max-width:70px;}
 }
 @media only screen and (max-width: 360px) {
     input.form-control {    font-size: 9px;}

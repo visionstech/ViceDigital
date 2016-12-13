@@ -177,7 +177,10 @@ class AuthController extends Controller
             'password' => $request->password
             );
             $checkStatus=User::where('email',$request->email)->get();
+            echo "<pre>";print_r($checkStatus);exit;
+            if(!empty($checkStatus)){
             if($checkStatus[0]->status=='Live'){
+
                 if($this->auth->attempt($credentials))
                 {
                     if((Auth::user()->role == 2) || (Auth::user()->role == 1))
@@ -193,6 +196,9 @@ class AuthController extends Controller
                 {
                     return redirect()->back()->withErrors('These credentials do not match our records.');
                 }
+            }else{
+                return redirect()->back()->withErrors('These credentials do not match our records.');
+            }
             
             }else{
 

@@ -16,7 +16,7 @@
                   <li><a href="{{ url('/dashboard/configuration') }}"><i class="fa fa-cog"></i> Configuration</a></li>
                  <li class="{{ (strpos($_SERVER['REQUEST_URI'],'publisher') != false)?'current-page':'' }}"><a href="{{ url('/publisher') }}"><i class="fa fa-newspaper-o"></i> Publishers</a></li>
                  <?php if(Auth::user()->role==1) { ?>
-                    <li class="{{ (strpos($_SERVER['REQUEST_URI'],'user') != false)?'current-page':'' }}" ><a href="{{ url('/user') }}"><i class="fa fa-users"></i> User management system</a></li>
+                    <li class="{{ (strpos($_SERVER['REQUEST_URI'],'user') != false)?'current-page':'' }}" ><a href="{{ url('/user') }}"><i class="fa fa-users"></i> User Management System</a></li>
                  <?php } ?>
                 </ul>
               </div>

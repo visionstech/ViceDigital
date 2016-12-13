@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <!-- top tiles -->
-    <div class="content-header">
+    <div class="content-header data-pub">
         <ol class="breadcrumb">
            <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li><a href="{{ url('/publisher/publishers') }}">Publisher Overview</a></li>
@@ -12,9 +12,9 @@
         </ol>
     </div>
     <!-- /top tiles -->
-    <div class="row">
+    <div class="row publisher ">
         <h3>Ad Positions</h3>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12 publisher-padding">
             <div class="x_panel">
                 <div class="x_title tab_on">
                    

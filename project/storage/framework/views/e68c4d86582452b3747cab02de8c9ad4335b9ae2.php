@@ -87,7 +87,7 @@
         <label class="control-label text-left col-md-3 col-sm-3 col-xs-12" for="comscore_id">ComScore ID</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
              <?php $comscore_id = (old('comscore_id')) ? old('comscore_id') : ((!empty($PublisherData)) ? $PublisherData[0]['comscore_id'] : '');  ?>
-            <input type="text" placeholder="Comscore ID" class="form-control col-md-7 col-xs-12" name="comscore_id" value="<?php echo e($comscore_id); ?>">
+            <input type="text" placeholder="ComScore ID" class="form-control col-md-7 col-xs-12" name="comscore_id" value="<?php echo e($comscore_id); ?>">
         </div>
         <div class="clearfix"></div>
     </div>

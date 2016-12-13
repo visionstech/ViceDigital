@@ -311,7 +311,7 @@ class PublisherController extends Controller {
         $AdsData=array(); $TargetingData=array();
         if($adId!=''){
           $AdsData=Ads::where('id',decrypt($adId))->get()->toArray();
-           $TargetingData=AdspositionTargetings::where('ads_id',decrypt($adId))->get()->toArray();
+          $TargetingData=AdspositionTargetings::where('ads_id',decrypt($adId))->get()->toArray();
         }
         return view('publisher/add_positions', compact('products','positions','publisherId','adId','AdsData','TargetingData'));
       }catch (\Exception $e) 

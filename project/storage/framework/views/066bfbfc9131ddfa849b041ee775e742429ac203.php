@@ -10,9 +10,9 @@
         </ol>
     </div>
     <!-- /top tiles -->
-    <div class="row">
+    <div class="row publisher">
         <h3>Publishers</h3> 
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12 pub-table">
             <div class="x_panel">
                 <a class="btn btn-primary" style="float:right;" href="<?php echo e(url('/publisher/add-configuration')); ?>">NEW PUBLISHER</a>
                 <div class="x_content">

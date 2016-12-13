@@ -11,7 +11,7 @@
         </ol>
     </div>
     <!-- /top tiles -->
-    <div class="row">
+    <div class="row publisher">
         <h3>Manage Users</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -27,6 +27,7 @@
                             {{Session::get('error')}} 
                         </div> 
                     @endif
+                    <div class="pub-table">
                     <table class="table" id="example">
                         <thead>
                             <tr>
@@ -59,12 +60,13 @@
                                     <?php if($user->status != 'Deleted'){ ?>
                                           <a class="btn btn-primary actionAnchor" data-target=".bs-example-modal-dm" data-toggle="modal" href="javascript:void(0);" data-did="{{ encrypt($user->id) }}" data-status="Deleted">Delete</a>
                                     <?php } ?>
-                                    <a class="btn btn-primary" href="{{ url('/user/add-user/'.encrypt($user->id)) }}">Edit</a>
+                                    <a class="btn btn-primary actionedit" href="{{ url('/user/add-user/'.encrypt($user->id)) }}">Edit</a>
                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 
             </div>

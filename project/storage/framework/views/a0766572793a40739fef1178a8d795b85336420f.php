@@ -12,7 +12,7 @@
     </div>
     <!-- /top tiles -->
 
-    <div class="row">
+    <div class="row publisher">
         <h3><?php echo e(($userId)?'Edit':'Add'); ?> User</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">

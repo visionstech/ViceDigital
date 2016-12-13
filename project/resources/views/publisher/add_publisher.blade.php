@@ -7,7 +7,7 @@
 </style>
 @section('content')
     <!-- top tiles -->
-    <div class="content-header">
+    <div class="content-header data-pub">
         <ol class="breadcrumb">
            <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
            <li><a href="{{ url('/publisher/publishers') }}">Publisher Overview</a></li>
@@ -15,10 +15,10 @@
         </ol>
     </div>
     <!-- /top tiles -->
-    <div class="row">
+    <div class="row publisher">
         <h3 class="add-header">{{ ($publisherId)?'Edit':'Add'}} Publisher</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="error_form"></div>
+            <div class="random"></div>
             <div class="x_panel">            
 				<div class="x_title tab_on">
 					<a class="btn btn-default btn-ctrl btn-active" href="">Configuration</a>
@@ -58,7 +58,6 @@ $(document).ready(function()
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $("#add_field_button"); //Add button ID
     var x = 1; //initial text box count
-    
     $('#add_targeting').click(function() //on add input button click
     {
     $(add_button).click(function(e){ 
@@ -92,14 +91,15 @@ $(document).ready(function()
 		  $(".pagetype_main").append('<div class="pagetype_sub"><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="Page Title" class="form-control col-md-7 col-xs-12" name="page_type_title[]" value=""></div><div class="col-md-6 col-sm-6 col-xs-4"><input type="text" placeholder="Selector" class="form-control col-md-7 col-xs-12" name="page_type_selector[]" value=""></div></div></div>');
         }
 	});
-	
 	$("#delete_page_type").click(function(){
 		$('.pagetype_main div.pagetype_sub:last').remove();
 	});
+    $('.random').html('');
     $(".invalid_step").click(function(){
-        $('.error_form').html('Please fill this step first.');
+        $('.random').fadeIn(1000);
+        $('.random').html('<div class="alert alert-danger">Please fill configuration form first.</div>');
+        $('.random').fadeOut(4000);
     });
-
 }); 
 </script>
 @endsection
