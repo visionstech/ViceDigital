@@ -19,7 +19,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
             <div class="x_content"><br />
-            <form action="{{ url('/publisher/configuration') }}" method="post" class="form-horizontal form-label-left">
+            <form action="{{ url('/dashboard/configuration') }}" method="post" class="form-horizontal form-label-left">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @include('errors.user_error')
                 <div class="form-group">

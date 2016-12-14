@@ -89,4 +89,28 @@ class DashboardController extends Controller {
             return view('errors.error', $result);
         }
     }
+
+    /**
+      * Save the configuration settings.
+      * @param Request $request           
+      * @return Response
+      * Created on: 27/11/2016
+      * Updated on: 02/12/2016
+    **/
+    public function postConfiguration(Requests\ConfigurationSetting $request)
+    {
+      try {
+            $user = User::find(Auth::user()->id);
+            $data = $request->all();
+            $data['password'] = bcrypt($request->password);
+            $data['updated_by'] = Auth::user()->id;
+            $data['updated_ip'] = (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) ? $_SERVER['HTTP_CLIENT_IP'] : $_SERVER['REMOTE_ADDR'];
+            $update_configuration = $user->update($data);
+            return redirect('dashboard/configuration')->with('success','Configuration updated Successfully!');
+      }catch (\Exception $e) 
+      {   
+        $result = ['exception_message' => $e->getMessage()];
+        return view('errors.error', $result);
+      }
+    }
 }

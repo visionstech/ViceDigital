@@ -17,7 +17,6 @@ use Session;
 use Auth;
 use DB;
 
-
 class PublisherController extends Controller {
 	
     /*
@@ -45,30 +44,7 @@ class PublisherController extends Controller {
       return redirect('/publisher/publishers');
     }
 	
-    /**
-      * Save the configuration settings.
-      * @param Request $request           
-      * @return Response
-      * Created on: 27/11/2016
-      * Updated on: 02/12/2016
-    **/
-    public function postConfiguration(Requests\ConfigurationSetting $request)
-    {
-      try {
-            $user = User::find(Auth::user()->id);
-            $data = $request->all();
-            $data['password'] = bcrypt($request->password);
-            $data['updated_by'] = Auth::user()->id;
-            $data['updated_ip'] = (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) ? $_SERVER['HTTP_CLIENT_IP'] : $_SERVER['REMOTE_ADDR'];
-            $update_configuration = $user->update($data);
-            Session::put('message', 'Configuration updated Successfully!'); 
-            return redirect('publisher/configuration');
-      }catch (\Exception $e) 
-      { 	
-        $result = ['exception_message' => $e->getMessage()];
-        return view('errors.error', $result);
-      }
-    }
+    
 
     /**
       * List all the publishers.
@@ -476,7 +452,7 @@ class PublisherController extends Controller {
               $publisherData=array('custom_scripting'=>$data['custom_scripting'],'updated_by'=>Auth::user()->id,'updated_ip'=>(array_key_exists('HTTP_CLIENT_IP', $_SERVER)) ? $_SERVER['HTTP_CLIENT_IP'] : $_SERVER['REMOTE_ADDR']);
               $Publisher_Id=Publisher::where('id',$publisher_id)->update($publisherData);
             }
-            return redirect('publisher/publishers');
+            return redirect('publisher/publishers')->with('success','Custom scripting saved successfully.');
         }catch (\Exception $e){   
           $result = ['exception_message' => $e->getMessage()];
           return view('errors.error', $result);
