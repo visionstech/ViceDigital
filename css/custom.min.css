@@ -1605,7 +1605,7 @@ table.jambo_table tbody tr.selected td {
 }
 
 .dataTables_filter {
-    width: 50%;
+    width: 100%;
     float: right;
     text-align: right
 }
@@ -1633,7 +1633,7 @@ table.display {
 }
 
 table.display thead th {
-    padding: 8px 18px 8px 10px;
+    padding: 13px 18px 15px 10px;
     border-bottom: 1px solid black;
     font-weight: bold;
     cursor: pointer
@@ -4985,6 +4985,23 @@ h3.add-header {
   border: 1px solid #E9EAEC;
   position: relative;
   z-index: 3;
+  margin-left: 6px;
+}
+#example thead tr:first-child
+{
+   background-color: #73879C;
+  color: #fff;   
+}
+#example tr.odd {
+  background-color: #EDEDED;
+}
+#example thead tr th
+{
+ padding:13px 8px;   
+}
+.table>tbody>tr>td
+{
+    vertical-align:middle;
 }
 .btn.btn-primary.btn-ctrl {
   height: 35px;
@@ -5120,4 +5137,3 @@ h3.add-header {
   -moz-transition:background-color 0.4s linear;
   transition:background-color 0.4s linear;
 }
-

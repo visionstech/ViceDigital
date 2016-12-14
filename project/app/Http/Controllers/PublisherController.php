@@ -16,8 +16,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Session;
 use Auth;
 use DB;
-use App\Repositories\CommonRepositoryInterface;
-use App\Repositories\CommonRepository;
 
 
 class PublisherController extends Controller {
@@ -36,11 +34,10 @@ class PublisherController extends Controller {
      *
      * @return void
      */
-    public function __construct(Guard $auth, CommonRepositoryInterface $common)
+    public function __construct(Guard $auth)
     {
         $this->middleware('auth', ['except' => 'getRegister, postRegister']);
         $this->auth = $auth;
-        $this->common = $common;
     }
 
     public function getIndex()
@@ -247,11 +244,6 @@ class PublisherController extends Controller {
                   }
               }
               $Publisher_Id=encrypt($Publisher_Id);
-              //Insert Cache.
-
-
-
-
               return redirect('publisher/add-configuration/'.$Publisher_Id)->with('success','Configuration Added Successfully.');
           }
 			 
@@ -307,13 +299,14 @@ class PublisherController extends Controller {
         $products = Product::get()->toArray();
         $positions = Positioning::get()->toArray();
         $publisherId=$publisherId;
+        $Pagetypes=PublisherPagetypes::where('publisher_id',decrypt($publisherId))->get();
         $adId=$adId;
         $AdsData=array(); $TargetingData=array();
         if($adId!=''){
           $AdsData=Ads::where('id',decrypt($adId))->get()->toArray();
           $TargetingData=AdspositionTargetings::where('ads_id',decrypt($adId))->get()->toArray();
         }
-        return view('publisher/add_positions', compact('products','positions','publisherId','adId','AdsData','TargetingData'));
+        return view('publisher/add_positions', compact('products','positions','publisherId','adId','AdsData','TargetingData','Pagetypes'));
       }catch (\Exception $e) 
       { 	
         $result = ['exception_message' => $e->getMessage()];

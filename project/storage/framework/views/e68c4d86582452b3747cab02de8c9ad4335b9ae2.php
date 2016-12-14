@@ -1,4 +1,5 @@
     <h2>General Information</h2>
+    <div class="all-form">
     <div class="form-group">
        <label class="control-label text-left col-md-3 col-sm-3 col-xs-12" for="Status">Publisher Status</label>
        <div class="col-md-6 col-sm-6 col-xs-12">
@@ -174,3 +175,4 @@
         </div>
         <div class="clearfix"></div>
     </div> 
+    </div>

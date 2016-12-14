@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreatePublisherTargetingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,13 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('publisher_targetings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->smallInteger('status');            
+            $table->integer('publisher_id');
+            $table->string('key');
+            $table->string('value');
+            $table->integer('updated_by');
+            $table->string('updated_ip',100);                  
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('publisher_targetings');
     }
 }

@@ -17,7 +17,7 @@
     <div class="row publisher">
         <h3 class="add-header"><?php echo e(($publisherId)?'Edit':'Add'); ?> Publisher</h3>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="alert alert-danger"></div>
+            <div class="random"></div>
             <div class="x_panel">            
 				<div class="x_title tab_on">
 					<a class="btn btn-default btn-ctrl btn-active" href="">Configuration</a>
@@ -57,8 +57,6 @@ $(document).ready(function()
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $("#add_field_button"); //Add button ID
     var x = 1; //initial text box count
-    
-    $('.alert-danger').hide();
     $('#add_targeting').click(function() //on add input button click
     {
     $(add_button).click(function(e){ 
@@ -95,10 +93,11 @@ $(document).ready(function()
 	$("#delete_page_type").click(function(){
 		$('.pagetype_main div.pagetype_sub:last').remove();
 	});
+    $('.random').html('');
     $(".invalid_step").click(function(){
-        $('.alert-danger').show();
-        $('.alert-danger').html('Please fill configuration form first.');
-        $('.alert-danger').fadeOut(3000);
+        $('.random').fadeIn(1000);
+        $('.random').html('<div class="alert alert-danger">Please fill configuration form first.</div>');
+        $('.random').fadeOut(4000);
     });
 }); 
 </script>

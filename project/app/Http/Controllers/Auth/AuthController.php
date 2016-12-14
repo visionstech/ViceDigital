@@ -90,19 +90,19 @@ class AuthController extends Controller
     **/
     public function getRegister()
     {
-        try {	
+        try {   
             $products = Product::all();
             return view('auth.register', compact('products'));
         }
         catch (\Exception $e) 
-        { 	
+        {   
             $result = [
                     'exception_message' => $e->getMessage()
              ];
             return view('errors.error', $result);
         }
     }
-	
+    
     /**
       * Register user and save details.
       * @param Request $request            
@@ -154,7 +154,7 @@ class AuthController extends Controller
             return redirect()->back();
         }
         catch (\Exception $e) 
-        { 	
+        {   
             $result = [
                     'exception_message' => $e->getMessage()
              ];
@@ -177,8 +177,7 @@ class AuthController extends Controller
             'password' => $request->password
             );
             $checkStatus=User::where('email',$request->email)->get();
-            echo "<pre>";print_r($checkStatus);exit;
-            if(!empty($checkStatus)){
+            if(count($checkStatus)){
             if($checkStatus[0]->status=='Live'){
 
                 if($this->auth->attempt($credentials))
@@ -202,18 +201,18 @@ class AuthController extends Controller
             
             }else{
 
-                return redirect()->back()->withErrors('Sorry Your status is not Live or Active.');
+                return redirect()->back()->withErrors('These credentials do not match our records.');
             }
         }
         catch (\Exception $e) 
-        { 	
+        {   
             $result = [
                     'exception_message' => $e->getMessage()
              ];
             return view('errors.error', $result);
         }
     }
-	
+    
     /**
       * Log out the user from dashboard.
       * @param int $id            
@@ -223,7 +222,7 @@ class AuthController extends Controller
     **/
 
     public function getLogout()
-    {	
+    {   
         try {
                 $this->auth->logout();
                 Session::flush();

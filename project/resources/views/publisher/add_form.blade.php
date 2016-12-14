@@ -162,27 +162,23 @@
     ?>
     <div class="form-group">
         <div class="col-md-6 col-sm-6 col-xs-12 custom-check">
-            <input type="checkbox" name="page_type[]" value="1" id="homepage"  <?php echo $HomePage; ?> />
-            <label class="" for="homepage">Home page</label>
-            <br/>
-            <input type="checkbox" class="" id="artical" name="page_type[]" value="2" <?php echo $ArticalPage; ?> />
-             <label class="" for="artical">Article page</label>
-              <br/>
-              <input type="checkbox" id="video" name="page_type[]" value="3" <?php echo $VideoPage; ?> />
-            <label class="" for="video">Video page</label>
-            <br/>
-        </div>
-       
+            <?php if(count($Pagetypes)>0){ ?>
+                @foreach($Pagetypes as $key=>$Pagetype)
+                    <?php
+                    $CheckedPagetype = (old('page_type')) ? ((!empty(old('page_type')) && in_array(($Pagetype->id) ,old('page_type'))) ? 'checked="checked"' : '') : ((!empty($pageTypeArray) && in_array(($Pagetype->id),$pageTypeArray)) ? 'checked="checked"' : '');
+                    ?>    
+                    <input type="checkbox" name="page_type[]" value="{{ $Pagetype->id }}" id="{{ $key }}"  {{ $CheckedPagetype }} />
+                    <label class="" for="{{ $key }}"> {{ $Pagetype->title }} </label>
+                    <br/>
+                @endforeach
+            <?php } ?>
+        </div>       
         <div class="clearfix"></div>
     </div>
-
-    
-
-<div class="ln_solid"></div>
+    <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <button type="submit" class="btn btn-success">{{ $submitButtonText }}</button>
         </div>
         <div class="clearfix"></div>
-    </div>
- 
+    </div> 

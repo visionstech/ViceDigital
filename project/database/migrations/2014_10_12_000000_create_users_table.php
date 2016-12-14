@@ -17,7 +17,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-			$table->string('products');
+            $table->smallInteger('role');            
+			$table->enum('status', ['Live', 'Suspended','Paused','Deleted']);
+            $table->integer('updated_by');
+            $table->string('updated_ip',100);
             $table->rememberToken();
             $table->timestamps();
         });

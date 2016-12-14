@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?>
 	Error
 <?php $__env->stopSection(); ?>
