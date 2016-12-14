@@ -18,11 +18,17 @@
     div#example_wrapper > .row {overflow-x:scroll;}
     
     .publisher .col-sm-12 table{width:700px;}
+    @-moz-document url-prefix() {
+        .target_main.one .target_sub, .pagetype_main.one .pagetype_sub {  margin: 0 0 10px;
+        width: 67%;}
+}
 }
 @media only screen and (max-width: 640px) {
     .tab_on a {  min-width: 160px;  padding: 15px;}
      .admin-dashboard .btn{ padding: 4px 12px;}
      .dataTables_filter{width:100%;}
+     .x_content .form-control {margin-left: 0;}
+     
 }
 @media only screen and (max-width: 570px) {
     .tab_on a {  min-width: 120px;  padding: 10px;}    
@@ -36,7 +42,7 @@
     div#example_wrapper > .row {-webkit-overflow-scrolling: touch; }
     .data-pub >.breadcrumb{  top: 91px;}
     .publisher-padding{padding-top:30px;}
-    .all-form .col-sm-6 { width: 100%;}
+    /*.all-form .col-sm-6 { width: 100%;}*/
 }
 @media only screen and (max-width: 480px) {
     .tab_on a, .tab_on a.btn-active {  margin: 0 5px 5px 0;  width: 100%;}

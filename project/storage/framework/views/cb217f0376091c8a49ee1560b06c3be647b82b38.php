@@ -48,7 +48,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
-	 <div class="form-group">
+     <div class="form-group">
         <label class="control-label text-left col-md-3 col-sm-3 col-xs-12" for="mobile_sizes">Mobile Sizes<span class="required">*</span></label>
         <div class="col-md-2 col-sm-2 col-xs-12">
         <?php $mobile = (old('mobile')) ? old('mobile') : ((!empty($AdsData)) ? $AdsData[0]['mobile_sizes'] : 'default'); 
@@ -62,14 +62,14 @@
               <label for="mobileCustom"><span></span>Custom</label>
             </div>
         </div>
-		<div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" placeholder="Mobile Sizes" class="form-control col-md-7 col-xs-12 mobile_sizes" name="mobile_sizes" value="<?php echo e(((!empty($AdsData)) && ($AdsData[0]['mobile_sizes'] != 'default'))?$AdsData[0]['mobile_sizes']:''); ?>" <?php echo ($mobile=='default')?'readonly="true"':'' ?>>
         </div>
         <div class="clearfix"></div>
     </div>
  <div class="form-group">
         <label class="control-label text-left col-md-3 col-sm-3 col-xs-12" for="tablet_sizes">Tablet Sizes<span class="required">*</span></label>
-	 	<div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="col-md-2 col-sm-2 col-xs-12">
         <?php $tablet = (old('tablet')) ? old('tablet') : ((!empty($AdsData)) ? $AdsData[0]['tablet_sizes'] : 'default'); 
           ?>
             <div class="custom-radio">
@@ -101,7 +101,7 @@
               <label for="desktopCustom"><span></span>Custom</label>
             </div>
         </div>
-	 	<div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" placeholder="Desktop Sizes" <?php echo ($desktop=='default')?'readonly="true"':'' ?> class="form-control col-md-7 col-xs-12 desktop_sizes" name="desktop_sizes" value="<?php echo e(((!empty($AdsData)) && ($AdsData[0]['desktop_sizes'] != 'default'))?$AdsData[0]['desktop_sizes']:''); ?>">
         </div>
         <div class="clearfix"></div>
@@ -152,13 +152,8 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <?php 
-    
+    <?php     
     (!empty($AdsData))?($pageTypeArray=unserialize($AdsData[0]['page_type'])):($pageTypeArray=array());
-
-    $HomePage = (old('page_type')) ? ((!empty(old('page_type')) && in_array(1,old('page_type'))) ? 'checked="checked"' : '') : ((!empty($pageTypeArray) && in_array(1,$pageTypeArray)) ? 'checked="checked"' : '');
-    $ArticalPage = (old('page_type')) ?  ((!empty(old('page_type')) && in_array(2,old('page_type'))) ? 'checked="checked"' : '') : ((!empty($pageTypeArray) && in_array(2,$pageTypeArray)) ? 'checked="checked"' : '');
-    $VideoPage = (old('page_type')) ?  ((!empty(old('page_type')) && in_array(3,old('page_type'))) ? 'checked="checked"' : '') : ((!empty($pageTypeArray) && in_array(3,$pageTypeArray)) ? 'checked="checked"' : '');
     ?>
     <div class="form-group">
         <div class="col-md-6 col-sm-6 col-xs-12 custom-check">
@@ -171,6 +166,8 @@
                     <label class="" for="<?php echo e($key); ?>"> <?php echo e($Pagetype->title); ?> </label>
                     <br/>
                 <?php endforeach; ?>
+            <?php }else{ ?>
+                    <h5> No Page types selected in configuration form.<h5>
             <?php } ?>
         </div>       
         <div class="clearfix"></div>

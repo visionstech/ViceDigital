@@ -28,6 +28,12 @@
 	clear: both;
 	margin-bottom: 10px;
 	display: inline-block;
+	width:50%;
+}
+@-moz-document url-prefix() {
+
+   .target_main.one .target_sub, .pagetype_main.one .pagetype_sub {  width: 50%;}
+   
 }
 
 
